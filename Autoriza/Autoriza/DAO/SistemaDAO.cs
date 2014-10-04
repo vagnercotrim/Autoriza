@@ -22,5 +22,10 @@ namespace Autoriza.DAO
             return dao.Get(id);
         }
 
+        public IList<Sistema> GetAll()
+        {
+            return dao.GetAll().ToList();
+        }
+
     }
 }
