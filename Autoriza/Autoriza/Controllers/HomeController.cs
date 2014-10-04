@@ -10,17 +10,9 @@ namespace Autoriza.Controllers
 {
     public class HomeController : Controller
     {
-        private SistemaDAO SistemaDAO;
-
-        public HomeController(SistemaDAO sistemaDAO)
-        {
-            SistemaDAO = sistemaDAO;
-        }
 
         public ActionResult Index()
         {
-            Sistema sistema = SistemaDAO.Get(1);
-
             return View();
         }
 

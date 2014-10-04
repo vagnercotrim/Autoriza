@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Autoriza.Models;
 using NHibernate;
 using NHibernate.Linq;
 

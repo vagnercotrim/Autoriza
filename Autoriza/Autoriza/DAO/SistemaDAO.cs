@@ -27,5 +27,10 @@ namespace Autoriza.DAO
             return dao.GetAll().ToList();
         }
 
+        public void Save(Sistema sistema)
+        {
+            dao.Save(sistema);
+        }
+
     }
 }
