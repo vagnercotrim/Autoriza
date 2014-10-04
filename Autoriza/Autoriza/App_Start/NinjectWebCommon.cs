@@ -1,24 +1,20 @@
-using Autoriza.DAO;
-
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
 
 namespace Autoriza
 {
-    using System;
-    using System.Web;
-
+    using Autoriza.DAO;
+    using Autoriza.Infra.FluentValidation;
+    using Autoriza.Infra.NHibernate;
+    using FluentValidation;
+    using FluentValidation.Mvc;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
+    using NHibernate;
     using Ninject;
     using Ninject.Web.Common;
-    using NHibernate;
-    using Autoriza.Infra.NHibernate;
-    using Autoriza.Infra.FluentValidation;
-    using FluentValidation.Mvc;
-    using FluentValidation;
+    using System;
     using System.Reflection;
-    using Ninject.Web.Mvc.FilterBindingSyntax;
+    using System.Web;
     using System.Web.Mvc;
 
     public static class NinjectWebCommon
