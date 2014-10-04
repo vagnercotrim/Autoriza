@@ -16,20 +16,11 @@ namespace Autoriza.Tests.Controllers
     public class HomeControllerTest
     {
 
-        private SistemaDAO CreateSistemaDao()
-        {
-            ISession session = new SessionFactory().CreateSessionFactory().OpenSession();
-            SistemaDAO dao = new SistemaDAO(session);
-            return dao;
-        }
-
         [TestMethod]
         public void Index()
         {
             // Arrange
-            var dao = CreateSistemaDao();
-
-            HomeController controller = new HomeController(dao);
+            HomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -42,9 +33,7 @@ namespace Autoriza.Tests.Controllers
         public void About()
         {
             // Arrange
-            var dao = CreateSistemaDao();
-
-            HomeController controller = new HomeController(dao);
+            HomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -57,9 +46,7 @@ namespace Autoriza.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            var dao = CreateSistemaDao();
-
-            HomeController controller = new HomeController(dao);
+            HomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

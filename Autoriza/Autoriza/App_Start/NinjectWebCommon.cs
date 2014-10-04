@@ -14,14 +14,17 @@ namespace Autoriza
     using Ninject.Web.Common;
     using NHibernate;
     using Autoriza.Infra.NHibernate;
+    using Autoriza.Infra.FluentValidation;
+    using FluentValidation.Mvc;
+    using FluentValidation;
+    using System.Reflection;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
+    using System.Web.Mvc;
 
     public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
-        /// <summary>
-        /// Starts the application
-        /// </summary>
         public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
@@ -29,18 +32,11 @@ namespace Autoriza
             bootstrapper.Initialize(CreateKernel);
         }
 
-        /// <summary>
-        /// Stops the application.
-        /// </summary>
         public static void Stop()
         {
             bootstrapper.ShutDown();
         }
 
-        /// <summary>
-        /// Creates the kernel that will manage your application.
-        /// </summary>
-        /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
@@ -49,6 +45,7 @@ namespace Autoriza
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
+                RegisterFluentValidation(kernel);
                 RegisterServices(kernel);
                 return kernel;
             }
@@ -59,10 +56,16 @@ namespace Autoriza
             }
         }
 
-        /// <summary>
-        /// Load your modules or register your services here!
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
+        private static void RegisterFluentValidation(IKernel kernel)
+        {
+            NinjectValidatorFactory ninjectValidatorFactory = new NinjectValidatorFactory(kernel);
+            FluentValidationModelValidatorProvider.Configure(x => x.ValidatorFactory = ninjectValidatorFactory);
+            DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
+            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetExecutingAssembly())
+                           .ForEach(match => kernel.Bind(match.InterfaceType)
+                                                   .To(match.ValidatorType));
+        }
+
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<SistemaDAO>().To<SistemaDAO>();
