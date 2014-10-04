@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Autoriza.Models;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -10,7 +11,7 @@ namespace Autoriza.DAO
     public class GenericDAO<T> where T : class
     {
 
-        private ISession Session;
+        private readonly ISession Session;
 
         public GenericDAO(ISession session)
         {
@@ -25,6 +26,26 @@ namespace Autoriza.DAO
         public IQueryable<T> GetAll()
         {
             return Session.Query<T>();
+        }
+
+        public void Save(T t)
+        {
+            Session.Save(t);
+        }
+
+        public void Update(T t)
+        {
+            Session.Update(t);
+        }
+
+        public void Delete(T t)
+        {
+            Session.Delete(t);
+        }
+
+        public void Refresh(T t)
+        {
+            Session.Refresh(t);
         }
 
     }
