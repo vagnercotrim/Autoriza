@@ -1,3 +1,5 @@
+using Autoriza.DAO;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
 
@@ -63,6 +65,8 @@ namespace Autoriza
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<SistemaDAO>().To<SistemaDAO>();
+
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
         }
