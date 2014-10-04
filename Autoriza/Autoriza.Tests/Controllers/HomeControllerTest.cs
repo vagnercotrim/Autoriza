@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Autoriza.DAO;
+using Autoriza.Infra.NHibernate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Autoriza;
 using Autoriza.Controllers;
+using NHibernate;
 
 namespace Autoriza.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+
+        private SistemaDAO CreateSistemaDao()
+        {
+            ISession session = new SessionFactory().CreateSessionFactory().OpenSession();
+            SistemaDAO dao = new SistemaDAO(session);
+            return dao;
+        }
+
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var dao = CreateSistemaDao();
+
+            HomeController controller = new HomeController(dao);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +42,9 @@ namespace Autoriza.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var dao = CreateSistemaDao();
+
+            HomeController controller = new HomeController(dao);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +57,9 @@ namespace Autoriza.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var dao = CreateSistemaDao();
+
+            HomeController controller = new HomeController(dao);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
