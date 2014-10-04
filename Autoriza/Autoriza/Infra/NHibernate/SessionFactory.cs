@@ -9,12 +9,12 @@ using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Autoriza.Infra
+namespace Autoriza.Infra.NHibernate
 {
     public class SessionFactory
     {
 
-        public static ISessionFactory CreateSessionFactory()
+        public ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
                 .Database(

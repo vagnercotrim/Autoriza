@@ -211,7 +211,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infra\SessionFactory.cs" />
+    <Compile Include="Infra\NHibernate\SessionFactory.cs" />
+    <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
