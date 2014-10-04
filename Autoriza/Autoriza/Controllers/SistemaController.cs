@@ -33,9 +33,16 @@ namespace Autoriza.Controllers
         [HttpPost]
         public ActionResult Novo(Sistema sistema)
         {
-            SistemaDAO.Save(sistema);
+            try
+            {
+                SistemaDAO.Save(sistema);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return View(sistema);
+            }
         }
 
     }
