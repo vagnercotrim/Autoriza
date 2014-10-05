@@ -13,7 +13,8 @@ namespace Autoriza.Models.Mapping
         public SistemaMap()
         {
             Id(x => x.Id);
-            Map(x => x.Nome).Length(100).Not.Nullable();
+            Map(x => x.Nome).Not.Nullable();
+            Map(x => x.Url).Not.Nullable();
         }
 
     }

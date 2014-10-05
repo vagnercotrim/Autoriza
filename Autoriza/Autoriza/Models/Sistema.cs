@@ -16,5 +16,7 @@ namespace Autoriza.Models
 
         public virtual String Nome { get; set; }
 
+        public virtual String Url { get; set; }
+
     }
 }

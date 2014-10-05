@@ -12,6 +12,7 @@ namespace Autoriza.Models.Validation
         public SistemaValidation()
         {
             RuleFor(s => s.Nome).NotEmpty();
+            RuleFor(s => s.Url).NotEmpty();
         }
 
     }
