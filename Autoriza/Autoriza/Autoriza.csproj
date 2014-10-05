@@ -226,6 +226,8 @@
     <Compile Include="Infra\FluentValidation\NinjectValidatorFactory.cs" />
     <Compile Include="Infra\NHibernate\SessionFactory.cs" />
     <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
+    <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
+    <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -303,6 +305,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sistema\Index.cshtml" />
     <Content Include="Views\Sistema\Novo.cshtml" />
+    <Content Include="Views\Sistema\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

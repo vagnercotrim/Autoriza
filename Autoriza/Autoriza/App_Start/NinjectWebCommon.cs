@@ -12,6 +12,7 @@ namespace Autoriza
     using NHibernate;
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
     using System;
     using System.Reflection;
     using System.Web;
@@ -68,6 +69,10 @@ namespace Autoriza
 
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
+
+
+            kernel.BindFilter<TransactionFilter>(FilterScope.Action, 0)
+                .WhenActionMethodHas<TransactionAttribute>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Autoriza.DAO;
+using Autoriza.Infra.NHibernate;
 using Autoriza.Models;
 using System;
 using System.Collections.Generic;
@@ -45,5 +46,34 @@ namespace Autoriza.Controllers
             }
         }
 
+        public ActionResult Editar(int id)
+        {
+            try
+            {
+                Sistema sistema = SistemaDAO.Get(id);
+                
+                return View(sistema);        
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        [Transaction]
+        public ActionResult Editar(Sistema sistema)
+        {
+            try
+            {
+                SistemaDAO.Update(sistema);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return View(sistema);
+            }
+        }
     }
 }

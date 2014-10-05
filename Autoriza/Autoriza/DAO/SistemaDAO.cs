@@ -32,5 +32,11 @@ namespace Autoriza.DAO
             dao.Save(sistema);
         }
 
+
+        public void Update(Sistema sistema)
+        {
+            dao.Update(sistema);
+        }
+
     }
 }
