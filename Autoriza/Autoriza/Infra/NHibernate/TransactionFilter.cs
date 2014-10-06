@@ -14,13 +14,11 @@ namespace Autoriza.Infra.NHibernate
     public class TransactionFilter : IActionFilter
     {
 
-        private ISession Session;
         private ITransaction Transaction;
 
         public TransactionFilter(ISession session)
         {
-            Session = session;
-            Transaction = Session.Transaction;
+            Transaction = session.Transaction;
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
