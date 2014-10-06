@@ -32,6 +32,7 @@ namespace Autoriza.Controllers
         }
 
         [HttpPost]
+        [Transaction]
         public ActionResult Novo(Sistema sistema)
         {
             try
