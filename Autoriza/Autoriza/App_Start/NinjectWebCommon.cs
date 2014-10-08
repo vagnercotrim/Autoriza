@@ -67,6 +67,7 @@ namespace Autoriza
         {
             kernel.Bind<SistemaDAO>().To<SistemaDAO>();
             kernel.Bind<PermissaoDAO>().To<PermissaoDAO>();
+            kernel.Bind<PerfilDAO>().To<PerfilDAO>();
 
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
