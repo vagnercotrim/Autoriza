@@ -8,7 +8,7 @@ using FluentValidation.Attributes;
 namespace Autoriza.Models
 {
 
-    [Validator(typeof(SistemaValidation))]
+    [Validator(typeof (SistemaValidation))]
     public class Sistema
     {
 
@@ -17,6 +17,8 @@ namespace Autoriza.Models
         public virtual String Nome { get; set; }
 
         public virtual String Url { get; set; }
+
+        public virtual IList<Perfil> Perfis { get; set; }
 
     }
 }

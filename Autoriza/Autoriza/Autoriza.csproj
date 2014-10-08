@@ -215,6 +215,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SistemaController.cs" />
     <Compile Include="DAO\GenericDAO.cs" />
+    <Compile Include="DAO\PerfilDAO.cs" />
+    <Compile Include="DAO\PermissaoDAO.cs" />
     <Compile Include="DAO\SistemaDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -224,7 +226,10 @@
     <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
+    <Compile Include="Models\Mapping\PerfilMap.cs" />
+    <Compile Include="Models\Mapping\PermissaoMap.cs" />
     <Compile Include="Models\Mapping\SistemaMap.cs" />
+    <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Permissao.cs" />
     <Compile Include="Models\Sistema.cs" />
     <Compile Include="Models\Validation\SistemaValidation.cs" />
