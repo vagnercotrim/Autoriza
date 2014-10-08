@@ -15,7 +15,7 @@ namespace Autoriza.Infra.NHibernate
                     MsSqlConfiguration.MsSql2008.ConnectionString(
                         @"Data Source=G1711MAX\sqlexpress;Password=chapado;User ID=sa;Initial Catalog=autoriza;Application Name=Autoriza;")
                         .ShowSql())
-                .Mappings(m => m.FluentMappings.Add<SistemaMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SistemaMap>())
                 .BuildSessionFactory();
         }
 
