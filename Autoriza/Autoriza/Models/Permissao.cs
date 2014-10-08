@@ -15,5 +15,7 @@ namespace Autoriza.Models
 
         public virtual Sistema Sistema { get; set; }
 
+        public virtual IList<Perfil> Perfis { get; set; }
+
     }
 }

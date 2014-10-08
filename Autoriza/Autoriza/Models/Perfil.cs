@@ -15,6 +15,8 @@ namespace Autoriza.Models
         public virtual String Descricao { get; set; }
 
         public virtual Sistema Sistema { get; set; }
+        
+        public virtual IList<Permissao> Permissoes { get; set; }
 
     }
 }
