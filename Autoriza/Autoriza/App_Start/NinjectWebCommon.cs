@@ -66,6 +66,7 @@ namespace Autoriza
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<SistemaDAO>().To<SistemaDAO>();
+            kernel.Bind<PermissaoDAO>().To<PermissaoDAO>();
 
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
