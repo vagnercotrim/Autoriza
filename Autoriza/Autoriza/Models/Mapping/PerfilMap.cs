@@ -14,6 +14,7 @@ namespace Autoriza.Models.Mapping
             Id(x => x.Id);
             Map(x => x.Nome).Not.Nullable();
             Map(x => x.Descricao).Not.Nullable();
+            References(x => x.Sistema);
         }
 
     }
