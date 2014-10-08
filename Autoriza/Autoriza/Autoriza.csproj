@@ -225,6 +225,7 @@
     <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
     <Compile Include="Models\Mapping\SistemaMap.cs" />
+    <Compile Include="Models\Permissao.cs" />
     <Compile Include="Models\Sistema.cs" />
     <Compile Include="Models\Validation\SistemaValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
