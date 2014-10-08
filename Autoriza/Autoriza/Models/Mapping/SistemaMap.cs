@@ -16,6 +16,7 @@ namespace Autoriza.Models.Mapping
             Map(x => x.Nome).Not.Nullable();
             Map(x => x.Url).Not.Nullable();
             HasMany(x => x.Perfis);
+            HasMany(x => x.Permissoes);
         }
 
     }

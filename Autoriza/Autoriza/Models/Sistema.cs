@@ -20,5 +20,7 @@ namespace Autoriza.Models
 
         public virtual IList<Perfil> Perfis { get; set; }
 
+        public virtual IList<Permissao> Permissoes { get; set; }
+        
     }
 }
