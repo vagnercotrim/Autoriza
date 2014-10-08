@@ -1,0 +1,68 @@
+﻿@model Autoriza.Models.Sistema
+
+@{
+    ViewBag.Title = "Detalhar";
+}
+
+<h2>Detalhar</h2>
+
+<div>
+    <h4>Sistema</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h4>Perfis</h4>
+    <table class="table">
+        <tr>
+            <th>
+                <span>Nome</span>
+            </th>
+            <th>
+                <span>Descrição</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Perfis)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar a lista", "Index")
+</p>

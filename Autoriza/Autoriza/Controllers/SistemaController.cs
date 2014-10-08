@@ -76,5 +76,19 @@ namespace Autoriza.Controllers
                 return View(sistema);
             }
         }
+
+        public ActionResult Detalhar(int id)
+        {
+            try
+            {
+                Sistema sistema = SistemaDAO.Get(id);
+
+                return View(sistema);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
