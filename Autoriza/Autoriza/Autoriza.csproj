@@ -232,9 +232,11 @@
     <Compile Include="Models\Mapping\PerfilMap.cs" />
     <Compile Include="Models\Mapping\PermissaoMap.cs" />
     <Compile Include="Models\Mapping\SistemaMap.cs" />
+    <Compile Include="Models\Mapping\UsuarioMap.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Permissao.cs" />
     <Compile Include="Models\Sistema.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Validation\PerfilValidation.cs" />
     <Compile Include="Models\Validation\PermissaoValidation.cs" />
     <Compile Include="Models\Validation\SistemaValidation.cs" />
