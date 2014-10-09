@@ -92,5 +92,14 @@ namespace Autoriza.Controllers
 
             return View(perfil);
         }
+
+        [HttpPost]
+        public ActionResult Permissoes(int id, int[] permissoes)
+        {
+            Perfil perfil = perfilDAO.Get(id);
+            ViewBag.permissoes = permissaoDAO.GetAllBySistema(perfil.Sistema.Id);
+
+            return View(perfil);
+        }
     }
 }

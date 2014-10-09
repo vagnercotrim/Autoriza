@@ -32,19 +32,30 @@
 <div>
     <h4>Permissões deste perfil</h4>
     <hr />
-    <ul>
-        @foreach (var p in ViewBag.permissoes)
+
+    @using (Html.BeginForm("Permissoes", "Perfil", FormMethod.Post, null))
+    {
+        @Html.HiddenFor(model => model.Id)
+
+        foreach (var p in ViewBag.permissoes)
         {
             if (Model.Permissoes.Where(x => x.Id == p.Id).Count() > 0)
             {
-                <li>@p.Nome <strong>(sim)</strong></li>
+                <li><label for="permissoes"><input type="checkbox" checked value="@p.Id" name="permissoes[]" id="permissoes[]">@p.Nome</label></li>
             }
             else
             {
-                <li>@p.Nome <strong>(não)</strong></li>
+                <li><label for="permissoes"><input type="checkbox" value="@p.Id" name="permissoes[]" id="permissoes[]">@p.Nome</label></li>
             }
         }
-    </ul>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
 </div>
 
 <p>
