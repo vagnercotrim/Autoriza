@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Autoriza.DAO;
+using Autoriza.Domain;
 using Autoriza.Models;
 using Autoriza.Infra.NHibernate;
 
@@ -13,19 +14,23 @@ namespace Autoriza.Controllers
     public class PerfilController : Controller
     {
 
-        private PerfilDAO PerfilDAO;
-        private SistemaDAO SistemaDAO;
+        private readonly PerfilDAO perfilDAO;
+        private readonly PermissaoDAO permissaoDAO;
+        private readonly SistemaDAO sistemaDAO;
+        private PermissoesDoPerfil permissoesDoPerfil;
 
-        public PerfilController(PerfilDAO perfilDAO, SistemaDAO sistemaDAO)
+        public PerfilController(PerfilDAO perfilDAO, SistemaDAO sistemaDAO, PermissaoDAO permissaoDAO, PermissoesDoPerfil permissoesDoPerfil)
         {
-            PerfilDAO = perfilDAO;
-            SistemaDAO = sistemaDAO;
+            this.perfilDAO = perfilDAO;
+            this.permissaoDAO = permissaoDAO;
+            this.sistemaDAO = sistemaDAO;
+            this.permissoesDoPerfil = permissoesDoPerfil;
         }
 
         public ActionResult Novo(int id)
         {
             Perfil perfil = new Perfil();
-            perfil.Sistema = SistemaDAO.Get(id);
+            perfil.Sistema = sistemaDAO.Get(id);
 
             return View(perfil);
         }
@@ -36,9 +41,9 @@ namespace Autoriza.Controllers
         {
             try
             {
-                perfil.Sistema = SistemaDAO.Get(perfil.Sistema.Id);
+                perfil.Sistema = sistemaDAO.Get(perfil.Sistema.Id);
 
-                PerfilDAO.Save(perfil);
+                perfilDAO.Save(perfil);
 
                 return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
             }
@@ -52,13 +57,13 @@ namespace Autoriza.Controllers
         {
             try
             {
-                Perfil perfil = PerfilDAO.Get(id);
+                Perfil perfil = perfilDAO.Get(id);
 
                 return View(perfil);
             }
             catch (Exception)
             {
-                return RedirectToAction("Detalhar", "Sistema", new {id = id});
+                return RedirectToAction("Detalhar", "Sistema", new { id = id });
             }
         }
 
@@ -68,9 +73,9 @@ namespace Autoriza.Controllers
         {
             try
             {
-                perfil.Sistema = SistemaDAO.Get(perfil.Sistema.Id);
+                perfil.Sistema = sistemaDAO.Get(perfil.Sistema.Id);
 
-                PerfilDAO.Update(perfil);
+                perfilDAO.Update(perfil);
 
                 return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
             }
@@ -80,5 +85,12 @@ namespace Autoriza.Controllers
             }
         }
 
+        public ActionResult Permissoes(int id)
+        {
+            Perfil perfil = perfilDAO.Get(id);
+            ViewBag.permissoes = permissaoDAO.GetAllBySistema(perfil.Sistema.Id);
+
+            return View(perfil);
+        }
     }
 }

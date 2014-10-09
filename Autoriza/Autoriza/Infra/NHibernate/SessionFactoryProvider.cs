@@ -11,7 +11,7 @@ namespace Autoriza.Infra.NHibernate
     {
         protected override ISessionFactory CreateInstance(IContext context)
         {
-            var sessionFactory = new SessionFactory();
+            var sessionFactory = new SessionFactoryCreator();
             
             return sessionFactory.CreateSessionFactory();
         }

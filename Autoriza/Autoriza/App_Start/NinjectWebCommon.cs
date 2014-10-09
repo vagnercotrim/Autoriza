@@ -1,3 +1,5 @@
+using Autoriza.Domain;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
 
@@ -68,6 +70,8 @@ namespace Autoriza
             kernel.Bind<SistemaDAO>().To<SistemaDAO>();
             kernel.Bind<PermissaoDAO>().To<PermissaoDAO>();
             kernel.Bind<PerfilDAO>().To<PerfilDAO>();
+
+            kernel.Bind<PermissoesDoPerfil>().To<PermissoesDoPerfil>();
 
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();

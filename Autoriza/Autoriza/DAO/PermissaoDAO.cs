@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Autoriza.Models;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Autoriza.DAO
 {
@@ -11,10 +12,12 @@ namespace Autoriza.DAO
     {
 
         private readonly GenericDAO<Permissao> dao;
+        private readonly ISession session;
 
         public PermissaoDAO(ISession session)
         {
             dao = new GenericDAO<Permissao>(session);
+            this.session = session;
         }
 
         public Permissao Get(int id)
@@ -32,6 +35,12 @@ namespace Autoriza.DAO
         {
             dao.Update(permissao);
         }
+        
+        public IList<Permissao> GetAllBySistema(int id)
+        {
+            ICriteria criteria = session.CreateCriteria<Permissao>().Add(Expression.Eq("Sistema.Id", id));
 
+            return criteria.List<Permissao>();
+        }
     }
 }

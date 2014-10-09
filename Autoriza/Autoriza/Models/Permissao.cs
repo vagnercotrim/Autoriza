@@ -17,5 +17,9 @@ namespace Autoriza.Models
 
         public virtual IList<Perfil> Perfis { get; set; }
 
+        public override string ToString()
+        {
+            return String.Format("[Nome={0};Descricao={1}]", Nome, Descricao);
+        }
     }
 }

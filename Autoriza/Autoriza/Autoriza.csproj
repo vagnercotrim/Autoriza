@@ -220,11 +220,12 @@
     <Compile Include="DAO\PerfilDAO.cs" />
     <Compile Include="DAO\PermissaoDAO.cs" />
     <Compile Include="DAO\SistemaDAO.cs" />
+    <Compile Include="Domain\PermissoesDoPerfil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infra\FluentValidation\NinjectValidatorFactory.cs" />
-    <Compile Include="Infra\NHibernate\SessionFactory.cs" />
+    <Compile Include="Infra\NHibernate\SessionFactoryCreator.cs" />
     <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Views\Perfil\Editar.cshtml" />
     <Content Include="Views\Permissao\Novo.cshtml" />
     <Content Include="Views\Permissao\Editar.cshtml" />
+    <Content Include="Views\Perfil\Permissoes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

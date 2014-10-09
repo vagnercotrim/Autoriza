@@ -6,7 +6,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Autoriza.Infra.NHibernate
 {
-    public class SessionFactory
+    public class SessionFactoryCreator
     {
 
         public ISessionFactory CreateSessionFactory()
@@ -17,7 +17,7 @@ namespace Autoriza.Infra.NHibernate
                         @"Data Source=G1711MAX\sqlexpress;Password=chapado;User ID=sa;Initial Catalog=autoriza;Application Name=Autoriza;")
                         .ShowSql())
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SistemaMap>())
-                .ExposeConfiguration(c => new SchemaExport(c).Create(false, true)) // TODO Remover depois de definir todos os models
+                //.ExposeConfiguration(c => new SchemaExport(c).Create(false, true)) // TODO Remover depois de definir todos os models
                 .BuildSessionFactory();
         }
 
