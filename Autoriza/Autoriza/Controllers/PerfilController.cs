@@ -94,10 +94,13 @@ namespace Autoriza.Controllers
         }
 
         [HttpPost]
+        [Transaction]
         public ActionResult Permissoes(int id, int[] permissoes)
         {
             Perfil perfil = perfilDAO.Get(id);
             ViewBag.permissoes = permissaoDAO.GetAllBySistema(perfil.Sistema.Id);
+
+            permissoesDoPerfil.Atualizar(perfil, permissoes);
 
             return View(perfil);
         }
