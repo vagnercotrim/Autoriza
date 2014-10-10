@@ -1,4 +1,5 @@
 ﻿using Autoriza.DAO;
+using Autoriza.Infra;
 using Autoriza.Infra.NHibernate;
 using Autoriza.Models;
 using System;

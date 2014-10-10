@@ -229,6 +229,7 @@
     <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
+    <Compile Include="Infra\Randomize.cs" />
     <Compile Include="Models\Mapping\PerfilMap.cs" />
     <Compile Include="Models\Mapping\PermissaoMap.cs" />
     <Compile Include="Models\Mapping\SistemaMap.cs" />
