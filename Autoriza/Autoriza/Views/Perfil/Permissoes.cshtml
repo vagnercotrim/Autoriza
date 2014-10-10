@@ -37,18 +37,30 @@
     {
         @Html.HiddenFor(model => model.Id)
 
-        foreach (var p in ViewBag.permissoes)
-        {
-            if (Model.Permissoes.Where(x => x.Id == p.Id).Count() > 0)
-            {
-                <li><label for="permissoes"><input type="checkbox" checked value="@p.Id" name="permissoes[]" id="permissoes[]">@p.Nome</label></li>
-            }
-            else
-            {
-                <li><label for="permissoes"><input type="checkbox" value="@p.Id" name="permissoes[]" id="permissoes[]">@p.Nome</label></li>
-            }
-        }
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Descrição</th>
+            </tr>
 
+            @foreach (var p in ViewBag.permissoes)
+            {
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        @if (Model.Permissoes.Where(x => x.Id == p.Id).Count() > 0)
+                        {
+                            <input type="checkbox" checked value="@p.Id" name="permissoes[]" id="permissoes[]" /> @p.Descricao
+                        }
+                        else
+                        {
+                            <input type="checkbox" value="@p.Id" name="permissoes[]" id="permissoes[]" /> @p.Descricao
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Salvar" class="btn btn-default" />
