@@ -28,6 +28,11 @@ namespace Autoriza.Models
             Randomize random = new Randomize();
             ChaveAcesso = random.Generate(15);
         }
-        
+
+        public override string ToString()
+        {
+            return String.Format("[Nome={0}]", Nome);
+        }
+
     }
 }

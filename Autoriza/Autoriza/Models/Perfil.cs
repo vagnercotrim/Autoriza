@@ -18,5 +18,9 @@ namespace Autoriza.Models
         
         public virtual IList<Permissao> Permissoes { get; set; }
 
+        public override string ToString()
+        {
+            return String.Format("[Nome={0}]", Nome);
+        }
     }
 }

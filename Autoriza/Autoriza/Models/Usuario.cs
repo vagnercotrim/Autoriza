@@ -17,6 +17,10 @@ namespace Autoriza.Models
         public virtual String Email { get; set; }
 
         public virtual bool Ativo { get; set; }
-
+        
+        public override string ToString()
+        {
+            return String.Format("[Login={0}]", Login);
+        }
     }
 }

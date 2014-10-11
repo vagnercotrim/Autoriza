@@ -19,7 +19,7 @@ namespace Autoriza.Models
 
         public override string ToString()
         {
-            return String.Format("[Nome={0};Descricao={1}]", Nome, Descricao);
+            return String.Format("[Nome={0}]", Nome);
         }
     }
 }
