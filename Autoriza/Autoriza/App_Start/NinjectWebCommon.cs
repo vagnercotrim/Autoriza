@@ -1,7 +1,5 @@
-using Autoriza.Domain;
-
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
+//[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
+//[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
 
 namespace Autoriza
 {
@@ -19,6 +17,8 @@ namespace Autoriza
     using System.Reflection;
     using System.Web;
     using System.Web.Mvc;
+    using Autoriza.Domain;
+    using Autoriza.Jobs;
 
     public static class NinjectWebCommon
     {
@@ -70,6 +70,8 @@ namespace Autoriza
             kernel.Bind<SistemaDAO>().To<SistemaDAO>();
             kernel.Bind<PermissaoDAO>().To<PermissaoDAO>();
             kernel.Bind<PerfilDAO>().To<PerfilDAO>();
+
+            kernel.Bind<VerificaSistemaOnline>().To<VerificaSistemaOnline>();
 
             kernel.Bind<PermissoesDoPerfil>().To<PermissoesDoPerfil>();
 
