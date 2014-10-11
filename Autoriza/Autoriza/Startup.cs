@@ -35,7 +35,7 @@ namespace Autoriza
                 config.UseNinjectActivator(CreateKernel());
             });
 
-            BackgroundJob.Schedule<VerificaSistemaOnline>(x => x.Verifica(), TimeSpan.FromSeconds(30));
+            RecurringJob.AddOrUpdate<VerificaSistemaOnline>(online => online.Verifica(), Cron.Minutely);
         }
 
         private StandardKernel CreateKernel()
