@@ -22,5 +22,11 @@ namespace Autoriza.Models
         {
             return String.Format("[Login={0}]", Login);
         }
+
+        public Usuario()
+        {
+            Ativo = true;
+        }
+
     }
 }
