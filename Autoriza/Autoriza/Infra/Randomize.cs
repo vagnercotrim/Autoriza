@@ -5,11 +5,11 @@ namespace Autoriza.Infra
     public class Randomize
     {
         private readonly Random random = new Random();
-        private readonly String characters = "1234567890abdcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const String Characters = "1234567890abdcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         public String Generate(int size)
         {
-            return Generate(characters, size);
+            return Generate(Characters, size);
         }
 
         public String Generate(String chars, int size)
