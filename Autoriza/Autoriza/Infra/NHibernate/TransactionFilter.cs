@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http.Controllers;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using NHibernate;
 
 namespace Autoriza.Infra.NHibernate
@@ -14,25 +6,24 @@ namespace Autoriza.Infra.NHibernate
     public class TransactionFilter : IActionFilter
     {
 
-        private ITransaction Transaction;
+        private ISession session;
 
         public TransactionFilter(ISession session)
         {
-            Transaction = session.Transaction;
+            this.session = session;
         }
-
+        
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            Transaction.Begin();
+            session.BeginTransaction();
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if(Transaction.IsActive)
-                Transaction.Commit();
+            if (session.Transaction.IsActive)
+                session.Transaction.Commit();
             else
-                Transaction.Rollback();
+                session.Transaction.Rollback();
         }
-
     }
 }

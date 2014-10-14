@@ -1,3 +1,5 @@
+using Autoriza.Models.Validation;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
 
@@ -75,11 +77,12 @@ namespace Autoriza
 
             kernel.Bind<PermissoesDoPerfil>().To<PermissoesDoPerfil>();
 
+            kernel.Bind<PerfilValidation>().To<PerfilValidation>();
+
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
             
-            kernel.BindFilter<TransactionFilter>(FilterScope.Action, 0)
-                .WhenActionMethodHas<TransactionAttribute>();
+            kernel.BindFilter<TransactionFilter>(FilterScope.Action, 0).WhenActionMethodHas<TransactionAttribute>();
         }
     }
 }

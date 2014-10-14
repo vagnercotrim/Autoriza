@@ -1,26 +1,38 @@
 ﻿using Autoriza.DAO;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Autoriza.Models.Validation
 {
     public class PerfilValidation : AbstractValidator<Perfil>
     {
 
-        private PerfilDAO PerfilDAO;
+        private PerfilDAO dao;
 
-        public PerfilValidation(PerfilDAO perfilDAO)
+        public PerfilValidation(PerfilDAO dao)
         {
-            PerfilDAO = perfilDAO;
+            this.dao = dao;
 
-            RuleFor(s => s.Nome).NotEmpty();
-            RuleFor(s => s.Descricao).NotEmpty();
+            RuleFor(perfil => perfil.Nome).NotEmpty();
+            RuleFor(perfil => perfil.Descricao).NotEmpty();
+
+            RuleFor(perfil => perfil.Nome).Must((perfil, nome) => NomeDisponivel(perfil)).WithMessage("Este nome já está em uso.");
         }
 
-        // TODO Verificar se já existe um perfil com o mesmo nome para o sistema.
+        private bool NomeDisponivel(Perfil perfil)
+        {
+            Perfil noBanco = dao.FindByNome(perfil.Sistema.Id, perfil.Nome);
+
+            if (noBanco == null)
+                return true;
+
+            if (perfil.Id == noBanco.Id)
+                return true;
+
+            if (perfil.Nome != noBanco.Nome)
+                return true;
+
+            return false;
+        }
 
     }
 }

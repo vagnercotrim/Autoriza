@@ -8,6 +8,8 @@ using Autoriza.DAO;
 using Autoriza.Domain;
 using Autoriza.Models;
 using Autoriza.Infra.NHibernate;
+using Autoriza.Models.Validation;
+using FluentValidation.Results;
 
 namespace Autoriza.Controllers
 {
@@ -18,34 +20,45 @@ namespace Autoriza.Controllers
         private readonly PermissaoDAO permissaoDAO;
         private readonly SistemaDAO sistemaDAO;
         private PermissoesDoPerfil permissoesDoPerfil;
+        private PerfilValidation validation;
 
-        public PerfilController(PerfilDAO perfilDAO, SistemaDAO sistemaDAO, PermissaoDAO permissaoDAO, PermissoesDoPerfil permissoesDoPerfil)
+        public PerfilController(PerfilDAO perfilDAO, SistemaDAO sistemaDAO, PermissaoDAO permissaoDAO, PermissoesDoPerfil permissoesDoPerfil, PerfilValidation validation)
         {
             this.perfilDAO = perfilDAO;
             this.permissaoDAO = permissaoDAO;
             this.sistemaDAO = sistemaDAO;
             this.permissoesDoPerfil = permissoesDoPerfil;
+            this.validation = validation;
         }
 
         public ActionResult Novo(int id)
         {
-            Perfil perfil = new Perfil();
-            perfil.Sistema = sistemaDAO.Get(id);
+            Perfil perfil = new Perfil
+            {
+                Sistema = sistemaDAO.Get(id)
+            };
 
             return View(perfil);
         }
 
         [HttpPost]
         [Transaction]
-        public ActionResult Novo(Perfil perfil)
+        public ActionResult Novo([Bind(Exclude = "Id")]Perfil perfil)
         {
             try
             {
                 perfil.Sistema = sistemaDAO.Get(perfil.Sistema.Id);
 
-                perfilDAO.Save(perfil);
+                ValidationResult result = validation.Validate(perfil);
 
-                return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
+                if (result.IsValid)
+                {
+                    perfilDAO.Save(perfil);
+
+                    return RedirectToAction("Detalhar", "Sistema", new {id = perfil.Sistema.Id});
+                }
+                
+                return View(perfil);
             }
             catch (Exception)
             {
@@ -104,5 +117,6 @@ namespace Autoriza.Controllers
 
             return View(perfil);
         }
+
     }
 }
