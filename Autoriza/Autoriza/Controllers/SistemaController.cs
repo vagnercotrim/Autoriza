@@ -68,7 +68,11 @@ namespace Autoriza.Controllers
         {
             try
             {
-                SistemaDAO.Update(sistema);
+                Sistema noBanco = SistemaDAO.Get(sistema.Id);
+                noBanco.Nome = sistema.Nome;
+                noBanco.Url = sistema.Url;
+
+                SistemaDAO.Update(noBanco);
 
                 return RedirectToAction("Index");
             }

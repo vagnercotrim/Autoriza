@@ -16,7 +16,7 @@ namespace Autoriza
 
         public void Configuration(IAppBuilder app)
         {
-            app.UseNinjectMiddleware(FuncKernel());
+            app.UseNinjectMiddleware(GetKernel);
 
             app.UseHangfire(config =>
             {

@@ -4,8 +4,10 @@
 namespace Autoriza
 {
     using Autoriza.DAO;
+    using Autoriza.Domain;
     using Autoriza.Infra.FluentValidation;
     using Autoriza.Infra.NHibernate;
+    using Autoriza.Jobs;
     using FluentValidation;
     using FluentValidation.Mvc;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -17,8 +19,6 @@ namespace Autoriza
     using System.Reflection;
     using System.Web;
     using System.Web.Mvc;
-    using Autoriza.Domain;
-    using Autoriza.Jobs;
 
     public static class NinjectWebCommon
     {
