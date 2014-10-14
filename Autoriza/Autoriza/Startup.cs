@@ -1,9 +1,10 @@
-﻿using Autoriza.Infra.NInject;
+﻿using System;
 using Autoriza.Jobs;
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.Owin;
 using Ninject;
+using Ninject.Web.Common;
 using Ninject.Web.Common.OwinHost;
 using Owin;
 
@@ -12,25 +13,32 @@ namespace Autoriza
 {
     public class Startup
     {
+
         public void Configuration(IAppBuilder app)
         {
-            app.UseNinjectMiddleware(CreateKernel);
+            app.UseNinjectMiddleware(FuncKernel());
 
             app.UseHangfire(config =>
             {
                 config.UseSqlServerStorage(
                     @"Data Source=G1711MAX\sqlexpress;Password=chapado;User ID=sa;Initial Catalog=autoriza;Application Name=Autoriza;");
                 config.UseServer();
-                config.UseNinjectActivator(CreateKernel());
+                config.UseNinjectActivator(GetKernel());
             });
 
             RecurringJob.AddOrUpdate<VerificaSistemaOnline>(online => online.Verifica(), Cron.Minutely);
         }
 
-        private StandardKernel CreateKernel()
+        private Func<IKernel> FuncKernel()
         {
-            StandardKernelCreator creator = new StandardKernelCreator();
-            return creator.CreateStandardKernel();
+            return GetKernel;
+        }
+
+        private IKernel GetKernel()
+        {
+            Bootstrapper bootstrapper = new Bootstrapper();
+
+            return bootstrapper.Kernel;
         }
 
     }

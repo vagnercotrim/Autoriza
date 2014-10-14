@@ -1,5 +1,5 @@
-//[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
-//[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Autoriza.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Autoriza.NinjectWebCommon), "Stop")]
 
 namespace Autoriza
 {
@@ -77,8 +77,7 @@ namespace Autoriza
 
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
-
-
+            
             kernel.BindFilter<TransactionFilter>(FilterScope.Action, 0)
                 .WhenActionMethodHas<TransactionAttribute>();
         }

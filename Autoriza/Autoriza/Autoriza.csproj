@@ -266,7 +266,6 @@
     <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
-    <Compile Include="Infra\NInject\StandardKernelCreator.cs" />
     <Compile Include="Infra\Randomize.cs" />
     <Compile Include="Jobs\VerificaSistemaOnline.cs" />
     <Compile Include="Models\Mapping\PerfilMap.cs" />
