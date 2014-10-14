@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Autoriza.Models;
+using Autoriza.Models.Validation;
+using FluentValidation.Results;
 
 namespace Autoriza.Controllers
 {
@@ -14,11 +16,13 @@ namespace Autoriza.Controllers
         
         private PermissaoDAO PermissaoDAO;
         private SistemaDAO SistemaDAO;
+        private PermissaoValidation validation;
 
-        public PermissaoController(PermissaoDAO permissaoDAO, SistemaDAO sistemaDAO)
+        public PermissaoController(PermissaoDAO permissaoDAO, SistemaDAO sistemaDAO, PermissaoValidation validation)
         {
             PermissaoDAO = permissaoDAO;
             SistemaDAO = sistemaDAO;
+            this.validation = validation;
         }
 
         public ActionResult Novo(int id)
@@ -31,15 +35,22 @@ namespace Autoriza.Controllers
 
         [HttpPost]
         [Transaction]
-        public ActionResult Novo(Permissao permissao)
+        public ActionResult Novo([Bind(Exclude = "Id")]Permissao permissao)
         {
             try
             {
                 permissao.Sistema = SistemaDAO.Get(permissao.Sistema.Id);
 
-                PermissaoDAO.Save(permissao);
+                ValidationResult result = validation.Validate(permissao);
 
-                return RedirectToAction("Detalhar", "Sistema", new { id = permissao.Sistema.Id });
+                if (result.IsValid)
+                {
+                    PermissaoDAO.Save(permissao);
+
+                    return RedirectToAction("Detalhar", "Sistema", new {id = permissao.Sistema.Id});
+                }
+
+                return View(permissao);
             }
             catch (Exception)
             {

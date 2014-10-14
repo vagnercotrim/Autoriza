@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Autoriza.DAO;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,33 @@ namespace Autoriza.Models.Validation
 {
     public class PermissaoValidation : AbstractValidator<Permissao>
     {
-        public PermissaoValidation()
-        {
-            RuleFor(s => s.Nome).NotEmpty();
-            RuleFor(s => s.Descricao).NotEmpty();
-        }
+        private PermissaoDAO dao;
 
-        // TODO Verificar se já existe uma permissão com o mesmo nome para o sistema.
+        public PermissaoValidation(PermissaoDAO dao)
+        {
+            this.dao = dao;
+
+            RuleFor(permissao => permissao.Nome).NotEmpty();
+            RuleFor(permissao => permissao.Descricao).NotEmpty();
+
+            RuleFor(permissao => permissao.Nome).Must((permissao, nome) => NomeDisponivel(permissao)).WithMessage("Este nome já está em uso.");
+        }
+        
+        private bool NomeDisponivel(Permissao permissao)
+        {
+            Permissao noBanco = dao.FindByNome(permissao.Sistema.Id, permissao.Nome);
+
+            if (noBanco == null)
+                return true;
+
+            if (permissao.Id == noBanco.Id)
+                return true;
+
+            if (permissao.Nome != noBanco.Nome)
+                return true;
+
+            return false;
+        }
 
     }
 }

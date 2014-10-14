@@ -42,5 +42,13 @@ namespace Autoriza.DAO
 
             return criteria.List<Permissao>();
         }
+
+        public Permissao FindByNome(int idSistema, string nome)
+        {
+            ICriteria criteria = session.CreateCriteria<Permissao>().Add(Expression.Eq("Sistema.Id", idSistema)).Add(Expression.Eq("Nome", nome));
+            
+            return criteria.UniqueResult<Permissao>();
+        }
+
     }
 }

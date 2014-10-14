@@ -78,6 +78,7 @@ namespace Autoriza
             kernel.Bind<PermissoesDoPerfil>().To<PermissoesDoPerfil>();
 
             kernel.Bind<PerfilValidation>().To<PerfilValidation>();
+            kernel.Bind<PermissaoValidation>().To<PermissaoValidation>();
 
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
