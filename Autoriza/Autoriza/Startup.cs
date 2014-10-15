@@ -34,11 +34,6 @@ namespace Autoriza
             RecurringJob.AddOrUpdate<VerificaSistemaOnline>(online => online.Verifica(), Cron.Minutely);
         }
 
-        private Func<IKernel> FuncKernel()
-        {
-            return GetKernel;
-        }
-
         private IKernel GetKernel()
         {
             Bootstrapper bootstrapper = new Bootstrapper();
