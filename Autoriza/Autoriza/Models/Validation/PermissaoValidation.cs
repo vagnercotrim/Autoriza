@@ -25,16 +25,7 @@ namespace Autoriza.Models.Validation
         {
             Permissao noBanco = dao.FindByNome(permissao.Sistema.Id, permissao.Nome);
 
-            if (noBanco == null)
-                return true;
-
-            if (permissao.Id == noBanco.Id)
-                return true;
-
-            if (permissao.Nome != noBanco.Nome)
-                return true;
-
-            return false;
+            return !permissao.Equals(noBanco);
         }
 
     }
