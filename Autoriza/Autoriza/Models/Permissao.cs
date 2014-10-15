@@ -21,5 +21,21 @@ namespace Autoriza.Models
         {
             return String.Format("[Nome={0}]", Nome);
         }
+
+        public override bool Equals(object obj)
+        {
+            Permissao permissao = (Permissao)obj;
+
+            if (obj == null)
+                return false;
+
+            if (this.Id == permissao.Id)
+                return true;
+
+            if (this.Nome == permissao.Nome)
+                return true;
+
+            return false;
+        }
     }
 }

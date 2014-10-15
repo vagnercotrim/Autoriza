@@ -18,6 +18,11 @@ namespace Autoriza
         {
             app.UseNinjectMiddleware(GetKernel);
 
+            ConfigureHangFire(app);
+        }
+        
+        private void ConfigureHangFire(IAppBuilder app)
+        {
             app.UseHangfire(config =>
             {
                 config.UseSqlServerStorage(
