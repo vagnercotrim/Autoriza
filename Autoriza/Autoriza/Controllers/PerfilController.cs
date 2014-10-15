@@ -55,9 +55,9 @@ namespace Autoriza.Controllers
                 {
                     perfilDAO.Save(perfil);
 
-                    return RedirectToAction("Detalhar", "Sistema", new {id = perfil.Sistema.Id});
+                    return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
                 }
-                
+
                 return View(perfil);
             }
             catch (Exception)
@@ -87,10 +87,16 @@ namespace Autoriza.Controllers
             try
             {
                 perfil.Sistema = sistemaDAO.Get(perfil.Sistema.Id);
+                ValidationResult result = validation.Validate(perfil);
 
-                perfilDAO.Update(perfil);
+                if (result.IsValid)
+                {
+                    perfilDAO.Update(perfil);
 
-                return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
+                    return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
+                }
+
+                return View(perfil);
             }
             catch (Exception)
             {
