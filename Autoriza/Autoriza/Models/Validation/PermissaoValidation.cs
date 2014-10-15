@@ -20,12 +20,21 @@ namespace Autoriza.Models.Validation
 
             RuleFor(permissao => permissao.Nome).Must((permissao, nome) => NomeDisponivel(permissao)).WithMessage("Este nome já está em uso.");
         }
-        
+
         private bool NomeDisponivel(Permissao permissao)
         {
             Permissao noBanco = dao.FindByNome(permissao.Sistema.Id, permissao.Nome);
 
-            return !permissao.Equals(noBanco);
+            if (noBanco == null)
+                return true;
+
+            if (permissao.Id == noBanco.Id)
+                return true;
+
+            if (permissao.Nome != noBanco.Nome)
+                return true;
+
+            return false;
         }
 
     }
