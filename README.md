@@ -5,4 +5,4 @@ Autoriza
 - **Gerencidor de perfis**
 - **Gerencidor de usuários**
 - **Single Sign On**
-- **Audotoria de login dos usuários**
+- **Auditoria de login dos usuários**
