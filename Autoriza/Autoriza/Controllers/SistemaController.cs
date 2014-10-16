@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Autoriza.Models.Validation;
+using FluentValidation.Results;
 
 namespace Autoriza.Controllers
 {
@@ -14,10 +16,12 @@ namespace Autoriza.Controllers
     {
 
         private SistemaDAO SistemaDAO;
+        private SistemaValidation validation;
 
-        public SistemaController(SistemaDAO sistemaDAO)
+        public SistemaController(SistemaDAO sistemaDAO, SistemaValidation validation)
         {
             SistemaDAO = sistemaDAO;
+            this.validation = validation;
         }
 
         public ActionResult Index()
@@ -38,9 +42,17 @@ namespace Autoriza.Controllers
         {
             try
             {
-                SistemaDAO.Save(sistema);
+                ValidationResult result = validation.Validate(sistema);
 
-                return RedirectToAction("Index");
+                if (result.IsValid)
+                {
+                    SistemaDAO.Save(sistema);
+
+                    return RedirectToAction("Index");
+                }
+
+                return View(sistema);
+
             }
             catch (Exception)
             {
@@ -53,8 +65,8 @@ namespace Autoriza.Controllers
             try
             {
                 Sistema sistema = SistemaDAO.Get(id);
-                
-                return View(sistema);        
+
+                return View(sistema);
             }
             catch (Exception)
             {
@@ -72,9 +84,17 @@ namespace Autoriza.Controllers
                 noBanco.Nome = sistema.Nome;
                 noBanco.Url = sistema.Url;
 
-                SistemaDAO.Update(noBanco);
+                ValidationResult result = validation.Validate(sistema);
 
-                return RedirectToAction("Index");
+                if (result.IsValid)
+                {
+                    SistemaDAO.Update(noBanco);
+
+                    return RedirectToAction("Index");
+                }
+
+                return View(sistema);
+
             }
             catch (Exception)
             {

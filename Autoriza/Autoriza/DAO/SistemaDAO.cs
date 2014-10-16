@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Autoriza.Models;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Autoriza.DAO
 {
     public class SistemaDAO
     {
 
-        private readonly GenericDAO<Sistema> dao; 
+        private readonly GenericDAO<Sistema> dao;
+        private readonly ISession session;
 
         public SistemaDAO(ISession session)
         {
             dao = new GenericDAO<Sistema>(session);
+            this.session = session;
         }
 
         public Sistema Get(int id)
@@ -36,6 +38,14 @@ namespace Autoriza.DAO
         public void Update(Sistema sistema)
         {
             dao.Update(sistema);
+        }
+
+        public Sistema FindByNome(String nome)
+        {
+            ICriteria criteria = session.CreateCriteria<Sistema>()
+                                        .Add(Expression.Eq("Nome", nome));
+
+            return criteria.UniqueResult<Sistema>();
         }
 
     }
