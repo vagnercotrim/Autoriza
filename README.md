@@ -1,8 +1,8 @@
 Autoriza
 ========
 
-- **Gerencidor de sistemas**
-- **Gerencidor de perfis**
-- **Gerencidor de usuários**
+- **Gerenciador de sistemas**
+- **Gerenciador de perfis**
+- **Gerenciador de usuários**
 - **Single Sign On**
 - **Auditoria de login dos usuários**
