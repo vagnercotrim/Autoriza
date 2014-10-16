@@ -45,7 +45,7 @@ namespace Autoriza.Controllers
                 {
                     SistemaDAO.Save(sistema);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Detalhar", "Sistema", new { id = sistema.Id});
                 }
 
                 return View(sistema);
