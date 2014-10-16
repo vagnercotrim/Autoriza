@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using Autoriza.Models;
 using NHibernate;
 using NHibernate.Criterion;
@@ -38,14 +35,17 @@ namespace Autoriza.DAO
         
         public IList<Permissao> GetAllBySistema(int id)
         {
-            ICriteria criteria = session.CreateCriteria<Permissao>().Add(Expression.Eq("Sistema.Id", id));
+            ICriteria criteria = session.CreateCriteria<Permissao>()
+                                        .Add(Expression.Eq("Sistema.Id", id));
 
             return criteria.List<Permissao>();
         }
 
         public Permissao FindByNome(int idSistema, string nome)
         {
-            ICriteria criteria = session.CreateCriteria<Permissao>().Add(Expression.Eq("Sistema.Id", idSistema)).Add(Expression.Eq("Nome", nome));
+            ICriteria criteria = session.CreateCriteria<Permissao>()
+                                        .Add(Expression.Eq("Sistema.Id", idSistema))
+                                        .Add(Expression.Eq("Nome", nome));
             
             return criteria.UniqueResult<Permissao>();
         }

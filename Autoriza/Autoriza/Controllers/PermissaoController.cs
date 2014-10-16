@@ -1,9 +1,6 @@
 ﻿using Autoriza.DAO;
 using Autoriza.Infra.NHibernate;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Autoriza.Models;
 using Autoriza.Models.Validation;
@@ -13,7 +10,7 @@ namespace Autoriza.Controllers
 {
     public class PermissaoController : Controller
     {
-        
+
         private PermissaoDAO PermissaoDAO;
         private SistemaDAO SistemaDAO;
         private PermissaoValidation validation;
@@ -47,7 +44,7 @@ namespace Autoriza.Controllers
                 {
                     PermissaoDAO.Save(permissao);
 
-                    return RedirectToAction("Detalhar", "Sistema", new {id = permissao.Sistema.Id});
+                    return RedirectToAction("Detalhar", "Sistema", new { id = permissao.Sistema.Id });
                 }
 
                 return View(permissao);
@@ -57,7 +54,7 @@ namespace Autoriza.Controllers
                 return View(permissao);
             }
         }
-        
+
         public ActionResult Editar(int id)
         {
             try
@@ -80,9 +77,16 @@ namespace Autoriza.Controllers
             {
                 permissao.Sistema = SistemaDAO.Get(permissao.Sistema.Id);
 
-                PermissaoDAO.Update(permissao);
+                ValidationResult result = validation.Validate(permissao);
 
-                return RedirectToAction("Detalhar", "Sistema", new { id = permissao.Sistema.Id });
+                if (result.IsValid)
+                {
+                    PermissaoDAO.Update(permissao);
+
+                    return RedirectToAction("Detalhar", "Sistema", new { id = permissao.Sistema.Id });
+                }
+
+                return View(permissao);
             }
             catch (Exception)
             {

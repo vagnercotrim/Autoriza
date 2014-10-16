@@ -1,9 +1,5 @@
 ﻿using Autoriza.DAO;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Autoriza.Models.Validation
 {
@@ -28,13 +24,23 @@ namespace Autoriza.Models.Validation
             if (noBanco == null)
                 return true;
 
+            if (permissao.Id == 0)
+                return podeSalvar(permissao, noBanco);
+
+            return podeAlterar(permissao, noBanco);
+        }
+
+        private bool podeAlterar(Permissao permissao, Permissao noBanco)
+        {
             if (permissao.Id == noBanco.Id)
                 return true;
 
-            if (permissao.Nome != noBanco.Nome)
-                return true;
+            return !permissao.Nome.Equals(noBanco.Nome);
+        }
 
-            return false;
+        private bool podeSalvar(Permissao permissao, Permissao noBanco)
+        {
+            return !permissao.Nome.Equals(noBanco.Nome);
         }
 
     }
