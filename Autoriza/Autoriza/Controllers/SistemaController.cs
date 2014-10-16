@@ -81,9 +81,11 @@ namespace Autoriza.Controllers
             try
             {
                 Sistema noBanco = SistemaDAO.Get(sistema.Id);
-                noBanco.Nome = sistema.Nome;
-                noBanco.Url = sistema.Url;
 
+                sistema.Perfis = noBanco.Perfis;
+                sistema.Permissoes = noBanco.Permissoes;
+                sistema.ChaveAcesso = noBanco.ChaveAcesso;
+                
                 ValidationResult result = validation.Validate(sistema);
 
                 if (result.IsValid)
