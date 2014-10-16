@@ -17,6 +17,8 @@ namespace Autoriza.Models
 
         public virtual String Url { get; set; }
 
+        public virtual String ChaveIdentificacao { get; set; }
+        
         public virtual String ChaveAcesso { get; set; }
         
         public virtual IList<Perfil> Perfis { get; set; }
