@@ -2,7 +2,7 @@
 
 namespace Autoriza.Infra
 {
-    public class Randomize
+    public class RandomString
     {
         private readonly Random random = new Random();
         private const String Characters = "1234567890abdcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

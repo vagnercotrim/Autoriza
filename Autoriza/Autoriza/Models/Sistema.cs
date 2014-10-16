@@ -27,7 +27,7 @@ namespace Autoriza.Models
 
         public Sistema()
         {
-            Randomize random = new Randomize();
+            RandomString random = new RandomString();
             ChaveAcesso = random.Generate(15);
         }
 
