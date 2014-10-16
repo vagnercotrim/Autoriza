@@ -20,14 +20,14 @@ namespace Autoriza.Domain
         {
             IList<Permissao> permissoesList = new List<Permissao>();
 
-            if(permissoes != null)
-            foreach (var id in permissoes)
-                permissoesList.Add(permissaoDAO.Get(id));
-            
+            if (permissoes != null)
+                foreach (var id in permissoes)
+                    permissoesList.Add(permissaoDAO.Get(id));
+
             perfil.Permissoes = permissoesList;
 
             perfilDAO.Update(perfil);
         }
-        
+
     }
 }
