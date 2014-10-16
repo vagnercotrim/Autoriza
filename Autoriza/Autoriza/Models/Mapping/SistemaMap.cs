@@ -1,9 +1,4 @@
-﻿using FluentNHibernate.Conventions;
-using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FluentNHibernate.Mapping;
 
 namespace Autoriza.Models.Mapping
 {

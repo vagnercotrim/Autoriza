@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Autoriza.DAO;
-using Autoriza.Infra.NHibernate;
+﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Autoriza;
 using Autoriza.Controllers;
-using NHibernate;
 
 namespace Autoriza.Tests.Controllers
 {

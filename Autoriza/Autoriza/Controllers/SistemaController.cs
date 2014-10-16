@@ -1,11 +1,8 @@
 ﻿using Autoriza.DAO;
-using Autoriza.Infra;
 using Autoriza.Infra.NHibernate;
 using Autoriza.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Autoriza.Models.Validation;
 using FluentValidation.Results;

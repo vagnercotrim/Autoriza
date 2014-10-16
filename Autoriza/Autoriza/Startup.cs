@@ -1,6 +1,4 @@
-﻿using System;
-using Autoriza.Jobs;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.Owin;
 using Ninject;
