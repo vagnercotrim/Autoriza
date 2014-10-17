@@ -7,13 +7,13 @@ namespace Autoriza.Domain
     public class PermissoesDoPerfil
     {
 
-        private readonly PerfilDAO perfilDAO;
-        private readonly PermissaoDAO permissaoDAO;
+        private readonly PerfilDAO _perfilDao;
+        private readonly PermissaoDAO _permissaoDao;
 
-        public PermissoesDoPerfil(PerfilDAO perfilDAO, PermissaoDAO permissaoDAO)
+        public PermissoesDoPerfil(PerfilDAO perfilDao, PermissaoDAO permissaoDao)
         {
-            this.perfilDAO = perfilDAO;
-            this.permissaoDAO = permissaoDAO;
+            _perfilDao = perfilDao;
+            _permissaoDao = permissaoDao;
         }
 
         public void Atualizar(Perfil perfil, int[] permissoes)
@@ -22,11 +22,11 @@ namespace Autoriza.Domain
 
             if (permissoes != null)
                 foreach (var id in permissoes)
-                    permissoesList.Add(permissaoDAO.Get(id));
+                    permissoesList.Add(_permissaoDao.Get(id));
 
             perfil.Permissoes = permissoesList;
 
-            perfilDAO.Update(perfil);
+            _perfilDao.Update(perfil);
         }
 
     }

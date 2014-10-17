@@ -11,21 +11,21 @@ namespace Autoriza.Controllers
     public class PermissaoController : Controller
     {
 
-        private PermissaoDAO PermissaoDAO;
-        private SistemaDAO SistemaDAO;
-        private PermissaoValidation validation;
+        private readonly PermissaoDAO _permissaoDao;
+        private readonly SistemaDAO _sistemaDao;
+        private readonly PermissaoValidation _validation;
 
-        public PermissaoController(PermissaoDAO permissaoDAO, SistemaDAO sistemaDAO, PermissaoValidation validation)
+        public PermissaoController(PermissaoDAO permissaoDao, SistemaDAO sistemaDao, PermissaoValidation validation)
         {
-            PermissaoDAO = permissaoDAO;
-            SistemaDAO = sistemaDAO;
-            this.validation = validation;
+            _permissaoDao = permissaoDao;
+            _sistemaDao = sistemaDao;
+            _validation = validation;
         }
 
         public ActionResult Novo(int id)
         {
             Permissao permissao = new Permissao();
-            permissao.Sistema = SistemaDAO.Get(id);
+            permissao.Sistema = _sistemaDao.Get(id);
 
             return View(permissao);
         }
@@ -36,13 +36,13 @@ namespace Autoriza.Controllers
         {
             try
             {
-                permissao.Sistema = SistemaDAO.Get(permissao.Sistema.Id);
+                permissao.Sistema = _sistemaDao.Get(permissao.Sistema.Id);
 
-                ValidationResult result = validation.Validate(permissao);
+                ValidationResult result = _validation.Validate(permissao);
 
                 if (result.IsValid)
                 {
-                    PermissaoDAO.Save(permissao);
+                    _permissaoDao.Save(permissao);
 
                     return RedirectToAction("Detalhar", "Sistema", new { id = permissao.Sistema.Id });
                 }
@@ -57,16 +57,12 @@ namespace Autoriza.Controllers
 
         public ActionResult Editar(int id)
         {
-            try
-            {
-                Permissao permissao = PermissaoDAO.Get(id);
+            Permissao permissao = _permissaoDao.Get(id);
 
-                return View(permissao);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Detalhar", "Sistema", new { id = id });
-            }
+            if (permissao == null)
+                return RedirectToAction("Index", "Sistema");
+
+            return View(permissao);
         }
 
         [HttpPost]
@@ -75,13 +71,13 @@ namespace Autoriza.Controllers
         {
             try
             {
-                permissao.Sistema = SistemaDAO.Get(permissao.Sistema.Id);
+                permissao.Sistema = _sistemaDao.Get(permissao.Sistema.Id);
 
-                ValidationResult result = validation.Validate(permissao);
+                ValidationResult result = _validation.Validate(permissao);
 
                 if (result.IsValid)
                 {
-                    PermissaoDAO.Update(permissao);
+                    _permissaoDao.Update(permissao);
 
                     return RedirectToAction("Detalhar", "Sistema", new { id = permissao.Sistema.Id });
                 }
