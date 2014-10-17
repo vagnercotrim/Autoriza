@@ -12,18 +12,18 @@ namespace Autoriza.Controllers
     public class SistemaController : Controller
     {
 
-        private SistemaDAO SistemaDAO;
-        private SistemaValidation validation;
+        private readonly SistemaDAO _sistemaDao;
+        private readonly SistemaValidation _validation;
 
-        public SistemaController(SistemaDAO sistemaDAO, SistemaValidation validation)
+        public SistemaController(SistemaDAO sistemaDao, SistemaValidation validation)
         {
-            SistemaDAO = sistemaDAO;
-            this.validation = validation;
+            _sistemaDao = sistemaDao;
+            _validation = validation;
         }
 
         public ActionResult Index()
         {
-            IList<Sistema> sistemas = SistemaDAO.GetAll();
+            IList<Sistema> sistemas = _sistemaDao.GetAll();
 
             return View(sistemas);
         }
@@ -39,13 +39,13 @@ namespace Autoriza.Controllers
         {
             try
             {
-                ValidationResult result = validation.Validate(sistema);
+                ValidationResult result = _validation.Validate(sistema);
 
                 if (result.IsValid)
                 {
-                    SistemaDAO.Save(sistema);
+                    _sistemaDao.Save(sistema);
 
-                    return RedirectToAction("Detalhar", "Sistema", new { id = sistema.Id});
+                    return RedirectToAction("Detalhar", "Sistema", new { id = sistema.Id });
                 }
 
                 return View(sistema);
@@ -59,16 +59,12 @@ namespace Autoriza.Controllers
 
         public ActionResult Editar(int id)
         {
-            try
-            {
-                Sistema sistema = SistemaDAO.Get(id);
+            Sistema sistema = _sistemaDao.Get(id);
 
-                return View(sistema);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index");
-            }
+            if (sistema == null)
+                return RedirectToAction("Index", "Sistema");
+
+            return View(sistema);
         }
 
         [HttpPost]
@@ -77,17 +73,17 @@ namespace Autoriza.Controllers
         {
             try
             {
-                Sistema noBanco = SistemaDAO.Get(sistema.Id);
+                Sistema noBanco = _sistemaDao.Get(sistema.Id);
 
                 sistema.Perfis = noBanco.Perfis;
                 sistema.Permissoes = noBanco.Permissoes;
                 sistema.ChaveAcesso = noBanco.ChaveAcesso;
-                
-                ValidationResult result = validation.Validate(sistema);
+
+                ValidationResult result = _validation.Validate(sistema);
 
                 if (result.IsValid)
                 {
-                    SistemaDAO.Update(noBanco);
+                    _sistemaDao.Update(noBanco);
 
                     return RedirectToAction("Index");
                 }
@@ -103,16 +99,12 @@ namespace Autoriza.Controllers
 
         public ActionResult Detalhar(int id)
         {
-            try
-            {
-                Sistema sistema = SistemaDAO.Get(id);
+            Sistema sistema = _sistemaDao.Get(id);
 
-                return View(sistema);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index");
-            }
+            if (sistema == null)
+                return RedirectToAction("Index", "Sistema");
+
+            return View(sistema);
         }
     }
 }
