@@ -12,7 +12,8 @@ namespace Autoriza.Models.Mapping
             Map(x => x.Nome).Not.Nullable();
             Map(x => x.Descricao).Not.Nullable();
 
-            References(x => x.Sistema);
+            References(x => x.Sistema).Not.Nullable();
+
             HasManyToMany(x => x.Permissoes);
         }
 
