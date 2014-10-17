@@ -10,48 +10,48 @@ namespace Autoriza.DAO
     public class SistemaDAO
     {
 
-        private readonly GenericDAO<Sistema> dao;
-        private readonly ISession session;
+        private readonly GenericDAO<Sistema> _dao;
+        private readonly ISession _session;
 
         public SistemaDAO(ISession session)
         {
-            dao = new GenericDAO<Sistema>(session);
-            this.session = session;
+            _dao = new GenericDAO<Sistema>(session);
+            _session = session;
         }
 
         public Sistema Get(int id)
         {
-            return dao.Get(id);
+            return _dao.Get(id);
         }
 
         public IList<Sistema> GetAll()
         {
-            return dao.GetAll().ToList();
+            return _dao.GetAll().ToList();
         }
 
         public void Save(Sistema sistema)
         {
-            dao.Save(sistema);
+            _dao.Save(sistema);
         }
 
 
         public void Update(Sistema sistema)
         {
-            dao.Update(sistema);
+            _dao.Update(sistema);
         }
 
         public Sistema FindByNome(String nome)
         {
-            ICriteria criteria = session.CreateCriteria<Sistema>()
-                                        .Add(Expression.Eq("Nome", nome));
+            ICriteria criteria = _session.CreateCriteria<Sistema>()
+                                        .Add(Restrictions.Eq("Nome", nome));
 
             return criteria.UniqueResult<Sistema>();
         }
 
         public Sistema FindByChaveIdentificacao(String chave)
         {
-            ICriteria criteria = session.CreateCriteria<Sistema>()
-                                        .Add(Expression.Eq("ChaveIdentificacao", chave));
+            ICriteria criteria = _session.CreateCriteria<Sistema>()
+                                        .Add(Restrictions.Eq("ChaveIdentificacao", chave));
 
             return criteria.UniqueResult<Sistema>();
         }

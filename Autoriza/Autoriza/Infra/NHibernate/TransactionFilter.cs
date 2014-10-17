@@ -6,24 +6,24 @@ namespace Autoriza.Infra.NHibernate
     public class TransactionFilter : IActionFilter
     {
 
-        private ISession session;
+        private readonly ISession _session;
 
         public TransactionFilter(ISession session)
         {
-            this.session = session;
+            _session = session;
         }
         
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            session.BeginTransaction();
+            _session.BeginTransaction();
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if (session.Transaction.IsActive)
-                session.Transaction.Commit();
+            if (_session.Transaction.IsActive)
+                _session.Transaction.Commit();
             else
-                session.Transaction.Rollback();
+                _session.Transaction.Rollback();
         }
     }
 }

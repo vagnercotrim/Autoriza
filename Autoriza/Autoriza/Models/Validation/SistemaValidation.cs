@@ -6,11 +6,11 @@ namespace Autoriza.Models.Validation
     public class SistemaValidation : AbstractValidator<Sistema>
     {
 
-        private SistemaDAO dao;
+        private readonly SistemaDAO _dao;
 
         public SistemaValidation(SistemaDAO dao)
         {
-            this.dao = dao;
+            _dao = dao;
 
             RuleFor(sistema => sistema.Nome).NotEmpty();
             RuleFor(sistema => sistema.Url).NotEmpty();
@@ -22,7 +22,7 @@ namespace Autoriza.Models.Validation
 
         private bool ChaveIdentificacaoDisponivel(Sistema sistema)
         {
-            Sistema noBanco = dao.FindByChaveIdentificacao(sistema.ChaveIdentificacao);
+            Sistema noBanco = _dao.FindByChaveIdentificacao(sistema.ChaveIdentificacao);
 
             if (noBanco == null)
                 return true;
@@ -48,7 +48,7 @@ namespace Autoriza.Models.Validation
 
         private bool NomeDisponivel(Sistema sistema)
         {
-            Sistema noBanco = dao.FindByNome(sistema.Nome);
+            Sistema noBanco = _dao.FindByNome(sistema.Nome);
 
             if (noBanco == null)
                 return true;

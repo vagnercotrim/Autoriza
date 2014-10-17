@@ -5,11 +5,11 @@ namespace Autoriza.Models.Validation
 {
     public class PermissaoValidation : AbstractValidator<Permissao>
     {
-        private PermissaoDAO dao;
+        private readonly PermissaoDAO _dao;
 
         public PermissaoValidation(PermissaoDAO dao)
         {
-            this.dao = dao;
+            _dao = dao;
 
             RuleFor(permissao => permissao.Nome).NotEmpty();
             RuleFor(permissao => permissao.Descricao).NotEmpty();
@@ -19,7 +19,7 @@ namespace Autoriza.Models.Validation
 
         private bool NomeDisponivel(Permissao permissao)
         {
-            Permissao noBanco = dao.FindByNome(permissao.Sistema.Id, permissao.Nome);
+            Permissao noBanco = _dao.FindByNome(permissao.Sistema.Id, permissao.Nome);
 
             if (noBanco == null)
                 return true;

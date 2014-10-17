@@ -6,11 +6,11 @@ namespace Autoriza.Models.Validation
     public class PerfilValidation : AbstractValidator<Perfil>
     {
 
-        private PerfilDAO dao;
+        private readonly PerfilDAO _dao;
 
         public PerfilValidation(PerfilDAO dao)
         {
-            this.dao = dao;
+            _dao = dao;
 
             RuleFor(perfil => perfil.Nome).NotEmpty();
             RuleFor(perfil => perfil.Descricao).NotEmpty();
@@ -20,7 +20,7 @@ namespace Autoriza.Models.Validation
 
         private bool NomeDisponivel(Perfil perfil)
         {
-            Perfil noBanco = dao.FindByNome(perfil.Sistema.Id, perfil.Nome);
+            Perfil noBanco = _dao.FindByNome(perfil.Sistema.Id, perfil.Nome);
 
             if (noBanco == null)
                 return true;

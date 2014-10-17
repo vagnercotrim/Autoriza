@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Autoriza.DAO;
 using Autoriza.Models;
 
@@ -6,16 +7,16 @@ namespace Autoriza.Jobs
 {
     public class VerificaSistemaOnline
     {
-        private SistemaDAO sistemaDao;
+        private readonly SistemaDAO _sistemaDao;
 
-        public VerificaSistemaOnline(SistemaDAO sistemaDAO)
+        public VerificaSistemaOnline(SistemaDAO sistemaDao)
         {
-            sistemaDao = sistemaDAO;
+            _sistemaDao = sistemaDao;
         }
 
         public void Verifica()
         {
-            sistemaDao.Save(new Sistema() {Nome = "asd", ChaveAcesso = DateTime.Now.ToString(), Url = "url"});
+            _sistemaDao.Save(new Sistema {Nome = "asd", ChaveAcesso = DateTime.Now.ToString(CultureInfo.InvariantCulture), Url = "url"});
         }
 
     }
