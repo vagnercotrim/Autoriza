@@ -12,28 +12,30 @@ namespace Autoriza.Controllers
     public class PerfilController : Controller
     {
 
-        private readonly PerfilDAO perfilDAO;
-        private readonly PermissaoDAO permissaoDAO;
-        private readonly SistemaDAO sistemaDAO;
-        private PermissoesDoPerfil permissoesDoPerfil;
-        private PerfilValidation validation;
+        private readonly PerfilDAO _perfilDao;
+        private readonly PermissaoDAO _permissaoDao;
+        private readonly SistemaDAO _sistemaDao;
+        private readonly PermissoesDoPerfil _permissoesDoPerfil;
+        private readonly PerfilValidation _validation;
 
-        public PerfilController(PerfilDAO perfilDAO, SistemaDAO sistemaDAO, PermissaoDAO permissaoDAO, PermissoesDoPerfil permissoesDoPerfil, PerfilValidation validation)
+        public PerfilController(PerfilDAO perfilDao, SistemaDAO sistemaDao, PermissaoDAO permissaoDao, PermissoesDoPerfil permissoesDoPerfil, PerfilValidation validation)
         {
-            this.perfilDAO = perfilDAO;
-            this.permissaoDAO = permissaoDAO;
-            this.sistemaDAO = sistemaDAO;
-            this.permissoesDoPerfil = permissoesDoPerfil;
-            this.validation = validation;
+            _perfilDao = perfilDao;
+            _permissaoDao = permissaoDao;
+            _sistemaDao = sistemaDao;
+            _permissoesDoPerfil = permissoesDoPerfil;
+            _validation = validation;
         }
 
         public ActionResult Novo(int id)
         {
-            Perfil perfil = new Perfil
-            {
-                Sistema = sistemaDAO.Get(id)
-            };
+            Sistema sistema = _sistemaDao.Get(id);
 
+            if(sistema == null)
+                return RedirectToAction("Index", "Sistema");
+
+            var perfil = new Perfil(sistema);
+            
             return View(perfil);
         }
 
@@ -43,13 +45,13 @@ namespace Autoriza.Controllers
         {
             try
             {
-                perfil.Sistema = sistemaDAO.Get(perfil.Sistema.Id);
+                perfil.Sistema = _sistemaDao.Get(perfil.Sistema.Id);
 
-                ValidationResult result = validation.Validate(perfil);
+                ValidationResult result = _validation.Validate(perfil);
 
                 if (result.IsValid)
                 {
-                    perfilDAO.Save(perfil);
+                    _perfilDao.Save(perfil);
 
                     return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
                 }
@@ -64,16 +66,12 @@ namespace Autoriza.Controllers
 
         public ActionResult Editar(int id)
         {
-            try
-            {
-                Perfil perfil = perfilDAO.Get(id);
+            Perfil perfil = _perfilDao.Get(id);
 
-                return View(perfil);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Detalhar", "Sistema", new { id = id });
-            }
+            if (perfil == null)
+                return RedirectToAction("Index", "Sistema");
+
+            return View(perfil);
         }
 
         [HttpPost]
@@ -82,12 +80,12 @@ namespace Autoriza.Controllers
         {
             try
             {
-                perfil.Sistema = sistemaDAO.Get(perfil.Sistema.Id);
-                ValidationResult result = validation.Validate(perfil);
+                perfil.Sistema = _sistemaDao.Get(perfil.Sistema.Id);
+                ValidationResult result = _validation.Validate(perfil);
 
                 if (result.IsValid)
                 {
-                    perfilDAO.Update(perfil);
+                    _perfilDao.Update(perfil);
 
                     return RedirectToAction("Detalhar", "Sistema", new { id = perfil.Sistema.Id });
                 }
@@ -102,8 +100,8 @@ namespace Autoriza.Controllers
 
         public ActionResult Permissoes(int id)
         {
-            Perfil perfil = perfilDAO.Get(id);
-            ViewBag.permissoes = permissaoDAO.GetAllBySistema(perfil.Sistema.Id);
+            Perfil perfil = _perfilDao.Get(id);
+            ViewBag.permissoes = _permissaoDao.GetAllBySistema(perfil.Sistema.Id);
 
             return View(perfil);
         }
@@ -112,10 +110,10 @@ namespace Autoriza.Controllers
         [Transaction]
         public ActionResult Permissoes(int id, int[] permissoes)
         {
-            Perfil perfil = perfilDAO.Get(id);
-            ViewBag.permissoes = permissaoDAO.GetAllBySistema(perfil.Sistema.Id);
+            Perfil perfil = _perfilDao.Get(id);
+            ViewBag.permissoes = _permissaoDao.GetAllBySistema(perfil.Sistema.Id);
 
-            permissoesDoPerfil.Atualizar(perfil, permissoes);
+            _permissoesDoPerfil.Atualizar(perfil, permissoes);
 
             return View(perfil);
         }

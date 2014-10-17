@@ -16,6 +16,13 @@ namespace Autoriza.Models
         
         public virtual IList<Permissao> Permissoes { get; set; }
 
+        public Perfil() { }
+
+        public Perfil(Sistema sistema)
+        {
+            Sistema = sistema;
+        }
+
         public override string ToString()
         {
             return String.Format("[Nome={0}]", Nome);
