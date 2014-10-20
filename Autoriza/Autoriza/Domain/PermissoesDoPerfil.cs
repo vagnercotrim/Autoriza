@@ -19,18 +19,19 @@ namespace Autoriza.Domain
 
         public void Atualizar(Perfil perfil, int[] permissoes)
         {
-            var permissoesList = PermissoesList(permissoes);
+            var permissoesList = PermissoesToEnumerable(permissoes);
 
             perfil.Permissoes = permissoesList.ToList();
 
             _perfilDao.Update(perfil);
         }
 
-        private IEnumerable<Permissao> PermissoesList(int[] permissoes)
+        private IEnumerable<Permissao> PermissoesToEnumerable(int[] permissoes)
         {
             if (permissoes != null)
                 foreach (var id in permissoes)
                     yield return _permissaoDao.Get(id);
         }
+
     }
 }
