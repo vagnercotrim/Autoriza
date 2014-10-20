@@ -31,6 +31,13 @@ namespace Autoriza.Models
             ChaveAcesso = random.Generate(15);
         }
 
+        public virtual void Atualiza(Sistema sistema)
+        {
+            ChaveAcesso = sistema.ChaveAcesso;
+            Perfis = sistema.Perfis;
+            Permissoes = sistema.Permissoes;
+        }
+
         public override string ToString()
         {
             return String.Format("[Nome={0}]", Nome);

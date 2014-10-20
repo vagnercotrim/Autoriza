@@ -74,10 +74,7 @@ namespace Autoriza.Controllers
             try
             {
                 Sistema noBanco = _sistemaDao.Get(sistema.Id);
-
-                sistema.Perfis = noBanco.Perfis;
-                sistema.Permissoes = noBanco.Permissoes;
-                sistema.ChaveAcesso = noBanco.ChaveAcesso;
+                sistema.Atualiza(noBanco);
 
                 ValidationResult result = _validation.Validate(sistema);
 
