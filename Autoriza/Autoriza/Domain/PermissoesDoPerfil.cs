@@ -1,4 +1,5 @@
-﻿using Autoriza.DAO;
+﻿using System.Linq;
+using Autoriza.DAO;
 using Autoriza.Models;
 using System.Collections.Generic;
 
@@ -18,16 +19,18 @@ namespace Autoriza.Domain
 
         public void Atualizar(Perfil perfil, int[] permissoes)
         {
-            IList<Permissao> permissoesList = new List<Permissao>();
+            var permissoesList = PermissoesList(permissoes);
 
-            if (permissoes != null)
-                foreach (var id in permissoes)
-                    permissoesList.Add(_permissaoDao.Get(id));
-
-            perfil.Permissoes = permissoesList;
+            perfil.Permissoes = permissoesList.ToList();
 
             _perfilDao.Update(perfil);
         }
 
+        private IEnumerable<Permissao> PermissoesList(int[] permissoes)
+        {
+            if (permissoes != null)
+                foreach (var id in permissoes)
+                    yield return _permissaoDao.Get(id);
+        }
     }
 }
