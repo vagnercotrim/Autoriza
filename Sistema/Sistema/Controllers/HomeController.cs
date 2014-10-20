@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RestSharp;
+using Sistema.Models;
 
 namespace Sistema.Controllers
 {
@@ -10,21 +12,22 @@ namespace Sistema.Controllers
     {
         public ActionResult Index()
         {
+            RestClient client = new RestClient(@"http://localhost:24657");
+
+            IRestRequest request = Post(@"login/login").AddParameter("identificacao", "autoriza_sso").AddParameter("acesso", "sksn48ndj");
+
+            var response = client.Execute<Usuario>(request);
+            Usuario user = response.Data;
+
             return View();
         }
-
-        public ActionResult About()
+        
+        private IRestRequest Post(String recurso)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            IRestRequest request = new RestRequest(recurso, Method.POST);
+            request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
+            return request;
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
