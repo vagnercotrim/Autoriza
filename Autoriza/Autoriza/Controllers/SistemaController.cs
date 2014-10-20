@@ -74,9 +74,9 @@ namespace Autoriza.Controllers
             try
             {
                 Sistema noBanco = _sistemaDao.Get(sistema.Id);
-                sistema.Atualiza(noBanco);
+                noBanco.Atualiza(sistema);
 
-                ValidationResult result = _validation.Validate(sistema);
+                ValidationResult result = _validation.Validate(noBanco);
 
                 if (result.IsValid)
                 {

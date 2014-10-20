@@ -33,9 +33,9 @@ namespace Autoriza.Models
 
         public virtual void Atualiza(Sistema sistema)
         {
-            ChaveAcesso = sistema.ChaveAcesso;
-            Perfis = sistema.Perfis;
-            Permissoes = sistema.Permissoes;
+            Nome = sistema.Nome;
+            Url = sistema.Url;
+            ChaveIdentificacao = sistema.ChaveIdentificacao;
         }
 
         public override string ToString()
