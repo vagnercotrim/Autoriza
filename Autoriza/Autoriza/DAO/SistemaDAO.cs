@@ -55,6 +55,15 @@ namespace Autoriza.DAO
 
             return criteria.UniqueResult<Sistema>();
         }
-        
+
+        public Sistema FindByIdentificacaoEAcesso(String identificacao, String acesso)
+        {
+            ICriteria criteria = _session.CreateCriteria<Sistema>()
+                                        .Add(Restrictions.Eq("ChaveIdentificacao", identificacao))
+                                        .Add(Restrictions.Eq("ChaveAcesso", acesso));
+
+            return criteria.UniqueResult<Sistema>();
+        }
+
     }
 }
