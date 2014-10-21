@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Autoriza.DAO;
 using Autoriza.Models;
+using Autoriza.ViewModels;
 
 namespace Autoriza.Controllers
 {
@@ -19,13 +20,17 @@ namespace Autoriza.Controllers
         {
             Sistema sistema = _sistemaDao.FindByIdentificacaoEAcesso(identificacao, acesso);
 
-            return View();
+            LoginView view = new LoginView() { Sistema = sistema };
+
+            return View(view);
         }
 
         [HttpPost]
-        public ActionResult Login(Usuario usuario)
+        public ActionResult Login(LoginView login)
         {
-            return View(usuario);
+            login.Sistema = _sistemaDao.Get(login.Sistema.Id);
+
+            return View(login);
         }
 
     }
