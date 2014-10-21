@@ -274,7 +274,6 @@
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
     <Compile Include="Infra\RandomString.cs" />
     <Compile Include="Jobs\VerificaSistemaOnline.cs" />
-    <Compile Include="Models\LoginView.cs" />
     <Compile Include="Models\Mapping\PerfilMap.cs" />
     <Compile Include="Models\Mapping\PermissaoMap.cs" />
     <Compile Include="Models\Mapping\SistemaMap.cs" />
