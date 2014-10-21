@@ -274,6 +274,7 @@
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
     <Compile Include="Infra\RandomString.cs" />
     <Compile Include="Jobs\VerificaSistemaOnline.cs" />
+    <Compile Include="Models\LoginView.cs" />
     <Compile Include="Models\Mapping\PerfilMap.cs" />
     <Compile Include="Models\Mapping\PermissaoMap.cs" />
     <Compile Include="Models\Mapping\SistemaMap.cs" />
@@ -345,10 +346,10 @@
     <Content Include="Views\Permissao\Novo.cshtml" />
     <Content Include="Views\Permissao\Editar.cshtml" />
     <Content Include="Views\Perfil\Permissoes.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

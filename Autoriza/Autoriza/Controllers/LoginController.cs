@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Web.Mvc;
+using Autoriza.Models;
 
 namespace Autoriza.Controllers
 {
     public class LoginController : Controller
     {
-
-
-        [HttpPost]
+        
         public ActionResult Login(String identificacao, String acesso, String urlRetorno)
         {
-            return Json(new {Nome = "nome", Email = "email"}, JsonRequestBehavior.AllowGet);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Usuario usuario)
+        {
+            return View(usuario);
         }
 
     }
