@@ -12,6 +12,9 @@ namespace Autoriza.Models.Mapping
             Map(x => x.Senha).Not.Nullable();
             Map(x => x.Email).Not.Nullable().Unique();
             Map(x => x.Ativo).Not.Nullable();
+            Map(x => x.DataAlteracao).Not.Nullable();
+
+            HasManyToMany(x => x.Perfis);
         }
     }
 }

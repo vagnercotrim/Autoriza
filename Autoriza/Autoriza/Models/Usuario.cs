@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Autoriza.Models
 {
@@ -14,7 +15,11 @@ namespace Autoriza.Models
         public virtual String Email { get; set; }
 
         public virtual bool Ativo { get; set; }
-        
+
+        public virtual DateTime DataAlteracao { get; set; }
+
+        public virtual IList<Perfil> Perfis { get; set; }
+
         public override string ToString()
         {
             return String.Format("[Login={0}]", Login);
@@ -23,6 +28,7 @@ namespace Autoriza.Models
         public Usuario()
         {
             Ativo = true;
+            DataAlteracao = DateTime.Now;
         }
 
     }
