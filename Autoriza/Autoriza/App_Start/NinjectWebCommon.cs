@@ -72,6 +72,7 @@ namespace Autoriza
             kernel.Bind<SistemaDAO>().To<SistemaDAO>();
             kernel.Bind<PermissaoDAO>().To<PermissaoDAO>();
             kernel.Bind<PerfilDAO>().To<PerfilDAO>();
+            kernel.Bind<UsuarioDAO>().To<UsuarioDAO>();
 
             kernel.Bind<VerificaSistemaOnline>().To<VerificaSistemaOnline>();
 
@@ -79,7 +80,7 @@ namespace Autoriza
 
             kernel.Bind<PerfilValidation>().To<PerfilValidation>();
             kernel.Bind<PermissaoValidation>().To<PermissaoValidation>();
-
+            
             kernel.Bind<ISessionFactory>().ToProvider<SessionFactoryProvider>().InSingletonScope();
             kernel.Bind<ISession>().ToMethod(context => kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
             
