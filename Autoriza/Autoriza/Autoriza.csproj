@@ -352,6 +352,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Usuario\Novo.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Detalhar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

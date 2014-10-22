@@ -34,8 +34,7 @@ namespace Autoriza.Controllers
         {
             return View();
         }
-
-
+        
         [HttpPost]
         [Transaction]
         public ActionResult Novo(Usuario usuario)
@@ -60,6 +59,15 @@ namespace Autoriza.Controllers
             }
         }
 
+        public ActionResult Detalhar(int id)
+        {
+            Usuario usuario = _usuarioDao.Get(id);
+
+            if (usuario == null)
+                return RedirectToAction("Index", "Usuario");
+
+            return View(usuario);
+        }
 
     }
 }
