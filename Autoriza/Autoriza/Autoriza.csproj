@@ -263,6 +263,7 @@
     <Compile Include="DAO\PerfilDAO.cs" />
     <Compile Include="DAO\PermissaoDAO.cs" />
     <Compile Include="DAO\SistemaDAO.cs" />
+    <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Domain\Autenticador.cs" />
     <Compile Include="Domain\PermissoesDoPerfil.cs" />
     <Compile Include="Global.asax.cs">

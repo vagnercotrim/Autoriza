@@ -8,6 +8,7 @@ namespace Autoriza.Models.Mapping
         {
             Id(x => x.Id);
 
+            Map(x => x.Nome).Not.Nullable().Unique();
             Map(x => x.Login).Not.Nullable().Unique();
             Map(x => x.Senha).Not.Nullable();
             Map(x => x.Email).Not.Nullable().Unique();

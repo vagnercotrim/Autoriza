@@ -8,6 +8,8 @@ namespace Autoriza.Models
 
         public virtual int Id { get; set; }
 
+        public virtual String Nome { get; set; }
+
         public virtual String Login { get; set; }
 
         public virtual String Senha { get; set; }
