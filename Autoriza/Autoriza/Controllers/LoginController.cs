@@ -21,7 +21,7 @@ namespace Autoriza.Controllers
         {
             Sistema sistema = _sistemaDao.FindByIdentificacaoEAcesso(identificacao, acesso);
 
-            LoginView view = new LoginView() { Sistema = sistema };
+            LoginView view = new LoginView { Sistema = sistema, UrlRetorno = urlRetorno };
 
             return View(view);
         }
@@ -31,7 +31,12 @@ namespace Autoriza.Controllers
         {
             login.Sistema = _sistemaDao.Get(login.Sistema.Id);
 
-            Autenticador aut = new Autenticador(login.Usuario);
+            Autenticador aut = new Autenticador();
+
+            if (aut.Verifica(login.Usuario))
+            {
+                return Redirect(login.UrlRetorno);
+            }
 
             return View(login);
         }

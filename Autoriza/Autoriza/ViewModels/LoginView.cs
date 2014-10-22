@@ -13,5 +13,7 @@ namespace Autoriza.ViewModels
 
         public Usuario Usuario { get; set; }
 
+        public String UrlRetorno { get; set; }
+
     }
 }

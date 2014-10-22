@@ -5,11 +5,9 @@ namespace Autoriza.Domain
     public class Autenticador
     {
 
-        private Usuario _usuario;
-
-        public Autenticador(Usuario usuario)
+        public bool Verifica(Usuario usuario)
         {
-            _usuario = usuario;
+            return usuario.Login == "vagner" && usuario.Senha == "123";
         }
 
     }
