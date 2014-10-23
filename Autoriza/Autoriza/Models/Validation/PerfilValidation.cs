@@ -25,23 +25,7 @@ namespace Autoriza.Models.Validation
             if (noBanco == null)
                 return true;
 
-            if (perfil.Id == 0)
-                return podeSalvar(perfil, noBanco);
-
-            return podeAlterar(perfil, noBanco);
-        }
-
-        private bool podeAlterar(Perfil perfil, Perfil noBanco)
-        {
-            if (perfil.Id == noBanco.Id)
-                return true;
-
-            return !perfil.Nome.Equals(noBanco.Nome);
-        }
-
-        private bool podeSalvar(Perfil perfil, Perfil noBanco)
-        {
-            return !perfil.Nome.Equals(noBanco.Nome);
+            return noBanco.Id == perfil.Id;
         }
 
     }

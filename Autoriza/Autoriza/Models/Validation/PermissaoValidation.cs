@@ -24,23 +24,7 @@ namespace Autoriza.Models.Validation
             if (noBanco == null)
                 return true;
 
-            if (permissao.Id == 0)
-                return podeSalvar(permissao, noBanco);
-
-            return podeAlterar(permissao, noBanco);
-        }
-
-        private bool podeAlterar(Permissao permissao, Permissao noBanco)
-        {
-            if (permissao.Id == noBanco.Id)
-                return true;
-
-            return !permissao.Nome.Equals(noBanco.Nome);
-        }
-
-        private bool podeSalvar(Permissao permissao, Permissao noBanco)
-        {
-            return !permissao.Nome.Equals(noBanco.Nome);
+            return noBanco.Id == permissao.Id;
         }
 
     }
