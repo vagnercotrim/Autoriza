@@ -55,6 +55,14 @@ namespace Autoriza.DAO
 
             return criteria.UniqueResult<Usuario>();
         }
-        
+
+        public Usuario FindByEmail(String email)
+        {
+            ICriteria criteria = _session.CreateCriteria<Usuario>()
+                                        .Add(Restrictions.Eq("Email", email));
+
+            return criteria.UniqueResult<Usuario>();
+        }
+
     }
 }
