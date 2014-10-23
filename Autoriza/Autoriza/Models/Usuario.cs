@@ -22,15 +22,24 @@ namespace Autoriza.Models
 
         public virtual IList<Perfil> Perfis { get; set; }
 
-        public override string ToString()
-        {
-            return String.Format("[Login={0}]", Login);
-        }
-
         public Usuario()
         {
             Ativo = true;
             DataAlteracao = DateTime.Now;
+        }
+
+        public virtual void Atualiza(Usuario usuario)
+        {
+            Nome = usuario.Nome;
+            Login = usuario.Login;
+            Email = usuario.Email;
+            DataAlteracao = DateTime.Now;
+            Ativo = usuario.Ativo;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("[Nome={0}]", Nome);
         }
 
     }

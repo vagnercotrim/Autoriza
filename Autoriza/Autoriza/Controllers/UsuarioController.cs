@@ -59,6 +59,43 @@ namespace Autoriza.Controllers
             }
         }
 
+        public ActionResult Editar(int id)
+        {
+            Usuario usuario = _usuarioDao.Get(id);
+
+            if (usuario == null)
+                return RedirectToAction("Index", "Sistema");
+
+            return View(usuario);
+        }
+
+        [HttpPost]
+        [Transaction]
+        public ActionResult Editar(Usuario usuario)
+        {
+            try
+            {
+                Usuario noBanco = _usuarioDao.Get(usuario.Id);
+                noBanco.Atualiza(usuario);
+
+                ValidationResult result = _validation.Validate(noBanco);
+
+                if (result.IsValid)
+                {
+                    _usuarioDao.Update(noBanco);
+
+                    return RedirectToAction("Index");
+                }
+
+                return View(usuario);
+
+            }
+            catch (Exception)
+            {
+                return View(usuario);
+            }
+        }
+
         public ActionResult Detalhar(int id)
         {
             Usuario usuario = _usuarioDao.Get(id);
