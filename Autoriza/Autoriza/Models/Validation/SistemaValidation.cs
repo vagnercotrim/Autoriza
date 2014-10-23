@@ -27,23 +27,7 @@ namespace Autoriza.Models.Validation
             if (noBanco == null)
                 return true;
 
-            if (sistema.Id == 0)
-                return podeSalvarChaveIdentificacao(sistema, noBanco);
-
-            return podeAlterarChaveIdentificacao(sistema, noBanco);
-        }
-
-        private bool podeAlterarChaveIdentificacao(Sistema sistema, Sistema noBanco)
-        {
-            if (sistema.Id == noBanco.Id)
-                return true;
-
-            return !sistema.ChaveIdentificacao.Equals(noBanco.ChaveIdentificacao);
-        }
-
-        private bool podeSalvarChaveIdentificacao(Sistema sistema, Sistema noBanco)
-        {
-            return !sistema.ChaveIdentificacao.Equals(noBanco.ChaveIdentificacao);
+            return noBanco.Id == sistema.Id;
         }
 
         private bool NomeDisponivel(Sistema sistema)
@@ -53,23 +37,7 @@ namespace Autoriza.Models.Validation
             if (noBanco == null)
                 return true;
 
-            if (sistema.Id == 0)
-                return podeSalvarNome(sistema, noBanco);
-
-            return podeAlterarNome(sistema, noBanco);
-        }
-
-        private bool podeAlterarNome(Sistema sistema, Sistema noBanco)
-        {
-            if (sistema.Id == noBanco.Id)
-                return true;
-
-            return !sistema.Nome.Equals(noBanco.Nome);
-        }
-
-        private bool podeSalvarNome(Sistema sistema, Sistema noBanco)
-        {
-            return !sistema.Nome.Equals(noBanco.Nome);
+            return noBanco.Id == sistema.Id;
         }
 
     }
