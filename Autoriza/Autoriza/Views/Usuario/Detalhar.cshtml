@@ -53,12 +53,32 @@
     </dl>
 </div>
 
-@foreach (var p in Model.Perfis)
-{
-    <span>@p.Sistema.Nome - @p.Nome</span>
-}
+<div>
+    <h4>Permissões de sistemas</h4>
+    <hr />
+
+    <table class="table">
+        <tr>
+            <th>
+                <span>Sistema</span>
+            </th>
+            <th>
+                <span>Perfil de acesso</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var p in Model.Perfis)
+        {
+            <tr>
+                <td>@p.Sistema.Nome</td>
+                <td>@p.Nome</td>
+            </tr>
+        }
+
+    </table>
+</div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volta a lista", "Index")
 </p>
