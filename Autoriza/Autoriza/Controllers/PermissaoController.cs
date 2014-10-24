@@ -24,8 +24,7 @@ namespace Autoriza.Controllers
 
         public ActionResult Novo(int id)
         {
-            Permissao permissao = new Permissao();
-            permissao.Sistema = _sistemaDao.Get(id);
+            Permissao permissao = new Permissao { Sistema = _sistemaDao.Get(id) };
 
             return View(permissao);
         }
