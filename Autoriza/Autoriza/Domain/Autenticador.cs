@@ -6,7 +6,7 @@ namespace Autoriza.Domain
     public class Autenticador
     {
 
-        private UsuarioDAO _usuarioDao;
+        private readonly UsuarioDAO _usuarioDao;
 
         public Autenticador(UsuarioDAO usuarioDao)
         {

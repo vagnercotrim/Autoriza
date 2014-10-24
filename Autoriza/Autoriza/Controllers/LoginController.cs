@@ -11,7 +11,7 @@ namespace Autoriza.Controllers
     {
 
         private readonly SistemaDAO _sistemaDao;
-        private Autenticador _autenticador;
+        private readonly Autenticador _autenticador;
 
         public LoginController(SistemaDAO sistemaDao, Autenticador autenticador)
         {
