@@ -17,6 +17,8 @@ namespace Autoriza.Models
 
         public virtual Sistema Sistema { get; set; }
 
+        public HistoricoAcesso() { }
+
         public HistoricoAcesso(Usuario usuario, Sistema sistema, DateTime data, String ip, String navegador)
         {
             Usuario = usuario;
