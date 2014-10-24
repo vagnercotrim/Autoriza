@@ -11,10 +11,12 @@ namespace Autoriza.Controllers
     {
 
         private readonly SistemaDAO _sistemaDao;
+        private Autenticador _autenticador;
 
-        public LoginController(SistemaDAO sistemaDao)
+        public LoginController(SistemaDAO sistemaDao, Autenticador autenticador)
         {
             _sistemaDao = sistemaDao;
+            this._autenticador = autenticador;
         }
 
         public ActionResult Login(String identificacao, String acesso, String urlRetorno)
@@ -31,9 +33,7 @@ namespace Autoriza.Controllers
         {
             login.Sistema = _sistemaDao.Get(login.Sistema.Id);
 
-            Autenticador aut = new Autenticador();
-
-            if (aut.Verifica(login.Usuario))
+            if (_autenticador.Verifica(login.Usuario))
             {
                 return Redirect(login.UrlRetorno);
             }

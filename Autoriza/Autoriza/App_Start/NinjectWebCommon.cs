@@ -77,6 +77,7 @@ namespace Autoriza
             kernel.Bind<VerificaSistemaOnline>().To<VerificaSistemaOnline>();
 
             kernel.Bind<PermissoesDoPerfil>().To<PermissoesDoPerfil>();
+            kernel.Bind<Autenticador>().To<Autenticador>();
 
             kernel.Bind<PerfilValidation>().To<PerfilValidation>();
             kernel.Bind<PermissaoValidation>().To<PermissaoValidation>();

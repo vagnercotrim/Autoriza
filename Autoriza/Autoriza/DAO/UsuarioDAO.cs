@@ -64,5 +64,14 @@ namespace Autoriza.DAO
             return criteria.UniqueResult<Usuario>();
         }
 
+        public Usuario FindByLoginESenha(Usuario usuario)
+        {
+            ICriteria criteria = _session.CreateCriteria<Usuario>()
+                                        .Add(Restrictions.Eq("Login", usuario.Login))
+                                        .Add(Restrictions.Eq("Senha", usuario.Senha));
+
+            return criteria.UniqueResult<Usuario>();
+        }
+
     }
 }
