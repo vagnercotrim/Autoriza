@@ -275,6 +275,9 @@
     <Compile Include="Infra\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Infra\NHibernate\TransactionAttribute.cs" />
     <Compile Include="Infra\NHibernate\TransactionFilter.cs" />
+    <Compile Include="Infra\NInject\DAOModule.cs" />
+    <Compile Include="Infra\NInject\FluentValidationModule.cs" />
+    <Compile Include="Infra\NInject\NHibernateModule.cs" />
     <Compile Include="Infra\RandomString.cs" />
     <Compile Include="Jobs\VerificaSistemaOnline.cs" />
     <Compile Include="Models\HistoricoAcesso.cs" />

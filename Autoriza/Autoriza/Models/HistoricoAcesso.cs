@@ -17,15 +17,16 @@ namespace Autoriza.Models
 
         public virtual Sistema Sistema { get; set; }
 
-        public HistoricoAcesso() { }
-
-        public HistoricoAcesso(Usuario usuario, Sistema sistema, DateTime data, String ip, String navegador)
+        public static HistoricoAcesso Novo(Usuario usuario, Sistema sistema, String ip, String navegador)
         {
-            Usuario = usuario;
-            Sistema = sistema;
-            Data = data;
-            Ip = ip;
-            Navegador = navegador;
+            return new HistoricoAcesso
+            {
+                Usuario = usuario,
+                Sistema = sistema,
+                Data = DateTime.Now,
+                Ip = ip,
+                Navegador = navegador
+            };
         }
 
     }
