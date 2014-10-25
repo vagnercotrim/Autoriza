@@ -16,7 +16,7 @@ namespace Autoriza.Controllers
         public LoginController(SistemaDAO sistemaDao, Autenticador autenticador)
         {
             _sistemaDao = sistemaDao;
-            this._autenticador = autenticador;
+            _autenticador = autenticador;
         }
 
         public ActionResult Login(String identificacao, String acesso, String urlRetorno)
