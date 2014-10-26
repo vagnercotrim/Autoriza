@@ -26,7 +26,6 @@ namespace Autoriza.DAO
             _dao.Save(perfil);
         }
 
-
         public void Update(Perfil perfil)
         {
             _dao.Update(perfil);
