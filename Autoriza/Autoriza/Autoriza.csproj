@@ -261,6 +261,7 @@
     <Compile Include="Controllers\SistemaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\GenericDAO.cs" />
+    <Compile Include="DAO\HistoricoAcessoDAO.cs" />
     <Compile Include="DAO\PerfilDAO.cs" />
     <Compile Include="DAO\PermissaoDAO.cs" />
     <Compile Include="DAO\SistemaDAO.cs" />
