@@ -355,7 +355,7 @@
     <Content Include="Views\Permissao\Novo.cshtml" />
     <Content Include="Views\Permissao\Editar.cshtml" />
     <Content Include="Views\Perfil\Permissoes.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\LoginAcesso.cshtml" />
     <Content Include="Views\Usuario\Novo.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Detalhar.cshtml" />

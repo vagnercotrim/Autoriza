@@ -19,23 +19,24 @@ namespace Autoriza.Controllers
             _autenticador = autenticador;
         }
 
+        [HttpPost]
         public ActionResult Login(String identificacao, String acesso, String urlRetorno)
         {
             Sistema sistema = _sistemaDao.FindByIdentificacaoEAcesso(identificacao, acesso);
 
             LoginView view = new LoginView { Sistema = sistema, UrlRetorno = urlRetorno };
 
-            return View(view);
+            return View("LoginAcesso", view);
         }
 
         [HttpPost]
-        public ActionResult Login(LoginView login)
+        public ActionResult LoginAcesso(LoginView login)
         {
             login.Sistema = _sistemaDao.Get(login.Sistema.Id);
 
             if (_autenticador.Verifica(login.Usuario))
             {
-                return Redirect(login.UrlRetorno);
+                return Redirect(login.UrlRetorno + "?token=ok");
             }
 
             return View(login);
